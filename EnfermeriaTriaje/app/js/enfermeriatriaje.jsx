@@ -17,9 +17,9 @@ import routes from './routes'
 let store = createStore();
 
 render((
-         <Provider store={store}>
-           <Router history={hashHistory}>
-             {routes(store)}
-           </Router>
-         </Provider>
-       ), document.getElementById('app'));
+  <Provider store={store}>
+    <Router history={hashHistory}>
+      {routes(store)}
+    </Router>
+  </Provider>
+), document.getElementById('app'));
