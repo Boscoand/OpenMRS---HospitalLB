@@ -1,11 +1,9 @@
 import React from 'react';
-import { Panel } from "react-bootstrap"
 import { Field, reduxForm } from 'redux-form';
 import validate from './validate';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 import {renderDropdownList,renderField,renderField2,renderDateTimePicker, renderCombobox} from '../Widgets';
 import DatosPreliminares from '../DatosPreliminares';
-import { Button } from "react-bootstrap"
+import { Button, Row, Col } from "react-bootstrap"
 
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? <span>{error}</span> : false;
@@ -291,8 +289,8 @@ const AmbulatorioFormSecondPage = props => {
 					</Row>
 				</div>
 				<hr></hr>
-
-				<Col md={12}>
+				<Col md={3}></Col>
+				<Col md={6}>
 					<Button bsStyle="success" style={ styles.button } type="submit" className="next">GUARDAR</Button>                            
 				</Col>
 

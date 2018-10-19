@@ -34,8 +34,7 @@ class AmbulatorioForm extends Component {
       titular:{},
       titularId:"",
       paciente:{},
-      enlace: `http://200.10.147.155:8080/openmrs/coreapps/datamanagement/mergePatients.page?app=coreapps.mergePatients`,
-      keySelected: "1"
+      enlace: `http://200.10.147.155:8080/openmrs/coreapps/datamanagement/mergePatients.page?app=coreapps.mergePatients`
     };
   }
   
@@ -80,7 +79,6 @@ class AmbulatorioForm extends Component {
   }
   
   handleChangeTitularID(ev){
-    // console.log(ev.target.value);
     this.setState({titularId:ev.target.value});
   }
 
@@ -158,10 +156,6 @@ class AmbulatorioForm extends Component {
     this.props.handleActualizarPersona(person,"PACIENTE");
   }
 
-  handleSelect(key) {
-    this.setState({ keySelected : key })
-  }
-
   render() {
     const { onSubmit } = this.props;
     const { page, enlace} = this.state;
@@ -185,16 +179,19 @@ class AmbulatorioForm extends Component {
       },
       button: {
         width: '100%'
+      }, 
+      inputSecondPage: {
+        zIndex: 1
       }
     };
     return (
       
       <div>
         
-        <Tab.Container className="selectedItem" style={ styles.navBar } id="left-tabs-example" defaultActiveKey="1">
+        <Tab.Container className="selectedItem" style={ styles.navBar } id="tab-left" defaultActiveKey="1">
           <Row>
             <Col sm={3} style={ styles.containerNavLeft }>
-              <Nav style={ styles.navBar } bsStyle="pills" stacked activeKey={ this.state.keySelected } onSelect={k => this.handleSelect(k)}>
+              <Nav style={ styles.navBar } bsStyle="pills" stacked>
                 <NavItem eventKey="1" onClick={this.page1} style={ styles.borderBottom }><b style={ styles.textFormat }>Datos Preliminares</b></NavItem>
                 <NavItem eventKey="2" onClick={this.page2} style={ styles.borderBottom }><b style={ styles.textFormat }>Titular</b></NavItem>
                 <NavItem eventKey="3" onClick={this.page3} style={ styles.borderBottom }><b style={ styles.textFormat }>Paciente</b></NavItem>
@@ -220,39 +217,52 @@ class AmbulatorioForm extends Component {
                   {page === 2 && (
                     <div>
                       <Col md={12}>
-                      <Form>
-                        <FormGroup>
-                            <Col md={8}>
-                                <FormControl type="text" value={this.props.titularId} onChange={this.props.changeTitularID}/>
-                                <FormControl.Feedback/>
-                            </Col>                             
-                            <Col md={4}>
-                                <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
-                            </Col>
-                        </FormGroup>
-                      </Form>
+                        <Form>
+                          <FormGroup>
+                              <Col md={3}></Col>
+                              <Col md={4}>
+                                  {/* <FormControl type="text" value={this.props.titularId} onChange={this.props.changeTitularID}/> */}
+                                  <FormControl type="text"/>
+                              </Col>                             
+                              <Col md={2}>
+                                  <Button bsStyle="success" style={ styles.button } onClick={this.props.handleTitularID}>BUSCAR</Button>                            
+                              </Col>
+                          </FormGroup>
+                        </Form>
                       </Col>
-                      
-                      <hr></hr>
 
                       <Col md={12}>
-                      <AmbulatorioFormSecondPage
-                        previousPage = {this.previousPage}
-                        onSubmit = {this.handleTitularSubmit}
-                        patientService={this.props.patientService} pacientePerson={this.props.pacientePerson}
-                        guardado = {this.props.titularGuardado}
-                        errorT = {this.props.titularError}
-                        errores = {this.props.titularErrores}
-                      />
+                        <AmbulatorioFormSecondPage
+                          previousPage = {this.previousPage}
+                          onSubmit = {this.handleTitularSubmit}
+                          patientService={this.props.patientService} pacientePerson={this.props.pacientePerson}
+                          guardado = {this.props.titularGuardado}
+                          errorT = {this.props.titularError}
+                          errores = {this.props.titularErrores}
+                        />
                       </Col>
                     </div>
                   )}
                 </Tab.Pane>
-                <Tab.Pane eventKey="3" style={ styles.containerItem}>
+                <Tab.Pane eventKey="3" style={ styles.containerItem }>
                   {page === 3 && (
                     <div>
-                      <input type="text" value={this.props.pacienteId} onChange={this.props.changepacienteId}/>
-                        <button onClick={this.props.handlepacienteId}>BUSCAR</button>
+                      <Col md={12}>
+                        <Form>
+                          <FormGroup>
+                              <Col md={3}></Col>
+                              <Col md={4}>
+                                  <FormControl type="text" value={this.props.pacienteId} onChange={this.props.changepacienteId}/>
+                                  <FormControl.Feedback/>
+                              </Col>                             
+                              <Col md={2}>
+                                  <Button bsStyle="success" style={ styles.button } onClick={this.props.handlepacienteId}>BUSCAR</Button>                            
+                              </Col>
+                          </FormGroup>
+                        </Form>
+                      </Col>
+
+                      <Col md={12}>
                         <AmbulatorioFormThirdPage
                           previousPage={this.previousPage}
                           onSubmit={this.handlePacienteSubmit}
@@ -261,8 +271,10 @@ class AmbulatorioForm extends Component {
                           errorT = {this.props.pacienteError}
                           errores = {this.props.PacienteErrores}
                         />
-                      </div>
-                    )}
+                      </Col>
+
+                    </div>
+                  )}
                 </Tab.Pane>
                 <Tab.Pane eventKey="4" style={ styles.containerItem}>
                   {page === 4 && (

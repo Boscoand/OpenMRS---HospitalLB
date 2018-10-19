@@ -1,6 +1,6 @@
 import React from 'react';
 import AmbulatorioForm from "./AmbulatorioForm";
-import { Col, Label, MenuItem, Button, Form, FormControl, HelpBlock, FormGroup, ControlLabel, Modal, Panel, ButtonToolbar, Table } from "react-bootstrap"
+import { Label } from "react-bootstrap"
 import {OCUPACION_UUID,NACIMIENTO_UUID,ETNIA_UUID,TELEFONO_UUID,CELULAR_UUID,OTRONUMERO_UUID,LUGARTRABAJO_UUID,ESTADOCIVIL_UUID, PADRE_NOMBRE_UUID, MADRE_NOMBRE_UUID,CONYUGE_NOMBRE_UUID} from '../../utilities/constants';
 import apiCall from '../../utilities/apiHelper' ;
 export default class AmbulatorioP extends React.Component {
