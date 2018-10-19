@@ -1,7 +1,6 @@
 import React from 'react';
 import AmbulatorioForm from "./AmbulatorioForm";
-//import showResults from "./showResults";
-// import { Values } from "redux-form-website-template";
+import { Col, Label, MenuItem, Button, Form, FormControl, HelpBlock, FormGroup, ControlLabel, Modal, Panel, ButtonToolbar, Table } from "react-bootstrap"
 import {OCUPACION_UUID,NACIMIENTO_UUID,ETNIA_UUID,TELEFONO_UUID,CELULAR_UUID,OTRONUMERO_UUID,LUGARTRABAJO_UUID,ESTADOCIVIL_UUID, PADRE_NOMBRE_UUID, MADRE_NOMBRE_UUID,CONYUGE_NOMBRE_UUID} from '../../utilities/constants';
 import apiCall from '../../utilities/apiHelper' ;
 export default class AmbulatorioP extends React.Component {
@@ -39,7 +38,6 @@ export default class AmbulatorioP extends React.Component {
         };
     }
     
-    
     componentWillMount(){
         
         // console.log(this.props)
@@ -68,7 +66,7 @@ export default class AmbulatorioP extends React.Component {
     
     handleActualizarPersona(persona,tipo){
         // {"attributes": [{"attributeType": "8d8718c2-c2cc-11de-8d13-0010c6dffd0f", "value": "Guayaquil Nacimiento" }]}
-       let attr = [];
+        let attr = [];
         let id = (tipo=="TITULAR")? this.state.titularUUID:this.state.pacienteUUID;
         let nameID = (tipo=="TITULAR")? this.state.titularName:this.state.pacienteName;
         let personID = (tipo=="TITULAR")? this.state.personTitular:this.state.personPaciente;
@@ -243,8 +241,7 @@ export default class AmbulatorioP extends React.Component {
         }
         
     }
-    
-    
+     
     handlepacienteId(){
         // console.log("paciente")
         this.setState({"pacienteGuardado":false});
@@ -363,8 +360,7 @@ export default class AmbulatorioP extends React.Component {
         
         // this.props.changeFieldValue("ambulatorio","Cedula",this.state.titularId);
     }
-    
-    
+      
     handleRelativeNames(nombres){
         let attr = [];
         let id = this.state.pacienteUUID;
@@ -398,6 +394,7 @@ export default class AmbulatorioP extends React.Component {
             this.setState({"nombresGuardado":true});
         });
     }
+
     handleNombresCompletos(nombres, tipo){
         if(tipo == "TITULAR"){
             this.setState({"titularNombresCompletos":nombres});
@@ -405,6 +402,7 @@ export default class AmbulatorioP extends React.Component {
             this.setState({"pacienteNombresCompletos":nombres});
         }
     }
+
     handleTitularID(){
         this.setState({"titularGuardado":false});
         apiCall(null,'get',`patient?v=full&q=${this.state.titularId}`).then((result) => {
@@ -509,6 +507,7 @@ export default class AmbulatorioP extends React.Component {
         
         // this.props.changeFieldValue("ambulatorio","Cedula",this.state.titularId);
     }
+
     changeTitularId(ev){
         this.setState({titularId:ev.target.value});
     }
@@ -517,35 +516,49 @@ export default class AmbulatorioP extends React.Component {
         this.setState({pacienteId:ev.target.value});
     }
     
-    render(){ return(<div style={{ padding: 10 }}>
-      <h2>Registro Ambulatorio</h2>
-      <AmbulatorioForm  changeTitularId={this.changeTitularId} titularId={this.state.titularId} 
-      handleTitularID={this.handleTitularID} onSubmit={this.showResults} 
-      patientService={this.props.pacienteOPENMRSID} pacientePerson={this.props.pacientePerson}
-      
-      handleActualizarPersona ={this.handleActualizarPersona}
-      handlepacienteId = {this.handlepacienteId}
-      changepacienteId={this.changepacienteId} pacienteId={this.state.pacienteId} 
-      pacienteCI ={this.state.pacienteId}
-      titularCI = {this.state.titularId}
-      
-      handleRelativeNames = {this.handleRelativeNames}
-      
-      PacienteNombre = {this.state.pacienteNombresCompletos}
-      TitularNombre = {this.state.titularNombresCompletos}
-      handleNombresCompletos = {this.handleNombresCompletos}
-      pacienteGuardado = {this.state.pacienteGuardado}
-      titularGuardado = {this.state.titularGuardado}
-      nombresGuardado = {this.state.nombresGuardado}
-      titularError = {this.state.titularError}
-      pacienteError = {this.state.pacienteError}
-      titularErrores = {this.state.TitularErrores}
-      pacienteErrores = {this.state.PacienteErrores}
-      />
+    render(){ 
+        const styles = {      
+			marginTitulo: {
+                marginTop: 50
+            },
+            labelComplete: {
+                width: "100%", 
+                float: "left",
+                marginBottom: 5
+            }
+        };
+        return(    
+            <div>
+                
+                {/* <h2>Registro Ambulatorio</h2> */}
+                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Registro Ambulatorio</Label></h1>
 
-    </div>);
+                <AmbulatorioForm  changeTitularId={this.changeTitularId} titularId={this.state.titularId} 
+                handleTitularID={this.handleTitularID} onSubmit={this.showResults} 
+                patientService={this.props.pacienteOPENMRSID} pacientePerson={this.props.pacientePerson}
+                
+                handleActualizarPersona ={this.handleActualizarPersona}
+                handlepacienteId = {this.handlepacienteId}
+                changepacienteId={this.changepacienteId} pacienteId={this.state.pacienteId} 
+                pacienteCI ={this.state.pacienteId}
+                titularCI = {this.state.titularId}
+                
+                handleRelativeNames = {this.handleRelativeNames}
+                
+                PacienteNombre = {this.state.pacienteNombresCompletos}
+                TitularNombre = {this.state.titularNombresCompletos}
+                handleNombresCompletos = {this.handleNombresCompletos}
+                pacienteGuardado = {this.state.pacienteGuardado}
+                titularGuardado = {this.state.titularGuardado}
+                nombresGuardado = {this.state.nombresGuardado}
+                titularError = {this.state.titularError}
+                pacienteError = {this.state.pacienteError}
+                titularErrores = {this.state.TitularErrores}
+                pacienteErrores = {this.state.PacienteErrores}
+                />                
+                
+            </div>
+        );
     }
     
 }
-
-//<Values form="ambulatorio"   format={this.showVal}  />

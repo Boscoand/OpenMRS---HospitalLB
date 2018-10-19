@@ -7,8 +7,10 @@ import AmbulatorioFormFourthPage from './AmbulatorioFormFourthPage';
 import AmbulatorioFormFifthPage from './AmbulatorioFormFifthPage';
 import AmbulatorioFormSixthPage from './AmbulatorioFormSixthPage';
 import OpenMRSView from '../openmrsView';
-import HOME from '../../utilities/constants' ;
 import VentanaForm from './VentanaForm';
+import { Nav, NavItem, Tab, Row, Col, Form, FormControl, FormGroup, Button } from "react-bootstrap"
+import "./AmbulatorioFormStyle.css"
+
 class AmbulatorioForm extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +34,8 @@ class AmbulatorioForm extends Component {
       titular:{},
       titularId:"",
       paciente:{},
-      enlace: `http://200.10.147.155:8080/openmrs/coreapps/datamanagement/mergePatients.page?app=coreapps.mergePatients`
+      enlace: `http://200.10.147.155:8080/openmrs/coreapps/datamanagement/mergePatients.page?app=coreapps.mergePatients`,
+      keySelected: "1"
     };
   }
   
@@ -155,109 +158,184 @@ class AmbulatorioForm extends Component {
     this.props.handleActualizarPersona(person,"PACIENTE");
   }
 
+  handleSelect(key) {
+    this.setState({ keySelected : key })
+  }
 
   render() {
     const { onSubmit } = this.props;
     const { page, enlace} = this.state;
-    
+    const styles = {      
+			navBar: {
+        display: "inline-block",
+        width: "100%",
+        marginTop: "15px"
+      }, 
+      borderBottom: {
+        borderBottom: "1px solid silver"
+      },
+      containerItem: {
+        margin: "10px"
+      },
+      containerNavLeft: {
+        borderRight: "1px solid silver",
+      },
+      textFormat: {
+        color: "#777"
+      },
+      button: {
+        width: '100%'
+      }
+    };
     return (
       
       <div>
-      <button onClick={this.page1} >Datos Preliminares</button>
-      <button onClick={this.page2} >Titular</button>
-      <button onClick={this.page3} >Paciente</button>
-      <button onClick={this.page4} >Otra Información</button>
-      <button onClick={this.page5} >Titular y 2° Progenitor</button>
-      <button onClick={this.page6} >Seguro y Cta. x Cobrar</button>
-      <button onClick={this.page7} >Ventana de Asistencia</button>
-      <button onClick={this.page8} >Finalizar proceso</button>
-        {page === 1 && <AmbulatorioFormFirstPage patientService={this.props.patientService} pacientePerson={this.props.pacientePerson} onSubmit={this.nextPage} />}
-        {page === 2 && (
-        <div>
-          <input type="text" value={this.props.titularId} onChange={this.props.changeTitularId}/>
-          <button onClick={this.props.handleTitularID}>BUSCAR</button>
-          <AmbulatorioFormSecondPage
-            previousPage = {this.previousPage}
-            onSubmit = {this.handleTitularSubmit}
-            patientService={this.props.patientService} pacientePerson={this.props.pacientePerson}
-            guardado = {this.props.titularGuardado}
-            errorT = {this.props.titularError}
-            errores = {this.props.titularErrores}
-          />
-          </div>
-        )}
-        {page === 3 && (
-        <div>
-        <input type="text" value={this.props.pacienteId} onChange={this.props.changepacienteId}/>
-          <button onClick={this.props.handlepacienteId}>BUSCAR</button>
-          <AmbulatorioFormThirdPage
-            previousPage={this.previousPage}
-            onSubmit={this.handlePacienteSubmit}
-            guardado = {this.props.pacienteGuardado}
-            patientService={this.props.patientService} pacientePerson={this.props.pacientePerson}
-            errorT = {this.props.pacienteError}
-            errores = {this.props.PacienteErrores}
-          />
-          </div>
-        )}
-        {page === 4 && (
-          <AmbulatorioFormFourthPage
-            previousPage={this.previousPage}
-            onSubmit={this.handleNamesSubmit}
-            PacienteNombre = {this.props.PacienteNombre}
-            pacienteCI = {this.props.pacienteCI}
-            TitularNombre = {this.props.TitularNombre}
-            titularCI = {this.props.titularCI}
-            guardado = {this.props.nombresGuardado}
-          />
-        )}
-        {page === 5 && (
-        <div>
-          <AmbulatorioFormFifthPage
-            previousPage={this.previousPage}
-            onSubmit={onSubmit}
-            PacienteNombre = {this.props.PacienteNombre}
-            pacienteCI = {this.props.pacienteCI}
-            TitularNombre = {this.props.TitularNombre}
-            titularCI = {this.props.titularCI}
-          />
-          </div>
-        )}
-        {page === 6 && (
-          <AmbulatorioFormSixthPage
-            previousPage={this.previousPage}
-            onSubmit={onSubmit}
-            PacienteNombre = {this.props.PacienteNombre}
-            pacienteCI = {this.props.pacienteCI}
-            TitularNombre = {this.props.TitularNombre}
-            titularCI = {this.props.titularCI}
-          />
-        )}
-        {page === 7 && (
-          <VentanaForm
-            previousPage={this.previousPage}
-            onSubmit={onSubmit}
-            PacienteNombre = {this.props.PacienteNombre}
-            pacienteCI = {this.props.pacienteCI}
-            TitularNombre = {this.props.TitularNombre}
-            titularCI = {this.props.titularCI}
-          />
-        )}
-        {page === 8 && (
-          <div>
-                    <h1>Ambulatorio</h1>
-                    
-                   <h2>Nuevos identificadores del Paciente:</h2>
-                   <h5 >Por favor, copie los siguientes códigos uno a uno</h5>
-                   <ul>
-                        <li>{this.props.pacienteCI}</li>
-                        <li>{this.props.patientService}</li>
-                   </ul>
-                   <h5 >Por favor, en el formulario de abajo; pegue uno a uno los códigos que copió en los recuadros con nombre PatientID, clic en Continue, seleccione el rectángulo de datos del paciente de la izquierda y clic en Yes, continue. Es importante que al pegar los códigos no repita en los 2 recuadros un mismo código</h5>
-                   <label>Dé clic cuando ya haya hecho los pasos anteriores</label><button onClick={this.handleClickContinuar}>CONTINUAR</button>
-                   <OpenMRSView url={enlace} esilos={this.estilos}/>
-            </div>
-        )}
+        
+        <Tab.Container className="selectedItem" style={ styles.navBar } id="left-tabs-example" defaultActiveKey="1">
+          <Row>
+            <Col sm={3} style={ styles.containerNavLeft }>
+              <Nav style={ styles.navBar } bsStyle="pills" stacked activeKey={ this.state.keySelected } onSelect={k => this.handleSelect(k)}>
+                <NavItem eventKey="1" onClick={this.page1} style={ styles.borderBottom }><b style={ styles.textFormat }>Datos Preliminares</b></NavItem>
+                <NavItem eventKey="2" onClick={this.page2} style={ styles.borderBottom }><b style={ styles.textFormat }>Titular</b></NavItem>
+                <NavItem eventKey="3" onClick={this.page3} style={ styles.borderBottom }><b style={ styles.textFormat }>Paciente</b></NavItem>
+                <NavItem eventKey="4" onClick={this.page4} style={ styles.borderBottom }><b style={ styles.textFormat }>Orta Información</b></NavItem>
+                <NavItem eventKey="5" onClick={this.page5} style={ styles.borderBottom }><b style={ styles.textFormat }>Titular y 2° Progenitor</b></NavItem>
+                <NavItem eventKey="6" onClick={this.page6} style={ styles.borderBottom }><b style={ styles.textFormat }>Seguro y Cta. x Cobrar</b></NavItem>
+                <NavItem eventKey="7" onClick={this.page7} style={ styles.borderBottom }><b style={ styles.textFormat }>Ventana de Asistencia</b></NavItem>
+                <NavItem eventKey="8" onClick={this.page8} style={ styles.borderBottom }><b style={ styles.textFormat }>Finalizar proceso</b></NavItem>
+              </Nav>
+            </Col>
+            <Col sm={9} style={ styles.containerRigth }>
+              <Tab.Content animation>
+                <Tab.Pane eventKey="1" style={ styles.containerItem}>
+                  {page === 1 && (
+                    <div>
+                      <Col md={12}>
+                        <AmbulatorioFormFirstPage patientService={this.props.patientService} pacientePerson={this.props.pacientePerson} onSubmit={this.nextPage} />
+                      </Col>
+                    </div>
+                  )}
+                </Tab.Pane>
+                <Tab.Pane eventKey="2" style={ styles.containerItem}>
+                  {page === 2 && (
+                    <div>
+                      <Col md={12}>
+                      <Form>
+                        <FormGroup>
+                            <Col md={8}>
+                                <FormControl type="text" value={this.props.titularId} onChange={this.props.changeTitularID}/>
+                                <FormControl.Feedback/>
+                            </Col>                             
+                            <Col md={4}>
+                                <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                            </Col>
+                        </FormGroup>
+                      </Form>
+                      </Col>
+                      
+                      <hr></hr>
+
+                      <Col md={12}>
+                      <AmbulatorioFormSecondPage
+                        previousPage = {this.previousPage}
+                        onSubmit = {this.handleTitularSubmit}
+                        patientService={this.props.patientService} pacientePerson={this.props.pacientePerson}
+                        guardado = {this.props.titularGuardado}
+                        errorT = {this.props.titularError}
+                        errores = {this.props.titularErrores}
+                      />
+                      </Col>
+                    </div>
+                  )}
+                </Tab.Pane>
+                <Tab.Pane eventKey="3" style={ styles.containerItem}>
+                  {page === 3 && (
+                    <div>
+                      <input type="text" value={this.props.pacienteId} onChange={this.props.changepacienteId}/>
+                        <button onClick={this.props.handlepacienteId}>BUSCAR</button>
+                        <AmbulatorioFormThirdPage
+                          previousPage={this.previousPage}
+                          onSubmit={this.handlePacienteSubmit}
+                          guardado = {this.props.pacienteGuardado}
+                          patientService={this.props.patientService} pacientePerson={this.props.pacientePerson}
+                          errorT = {this.props.pacienteError}
+                          errores = {this.props.PacienteErrores}
+                        />
+                      </div>
+                    )}
+                </Tab.Pane>
+                <Tab.Pane eventKey="4" style={ styles.containerItem}>
+                  {page === 4 && (
+                    <AmbulatorioFormFourthPage
+                      previousPage={this.previousPage}
+                      onSubmit={this.handleNamesSubmit}
+                      PacienteNombre = {this.props.PacienteNombre}
+                      pacienteCI = {this.props.pacienteCI}
+                      TitularNombre = {this.props.TitularNombre}
+                      titularCI = {this.props.titularCI}
+                      guardado = {this.props.nombresGuardado}
+                    />
+                  )}
+                </Tab.Pane>
+                <Tab.Pane eventKey="5" style={ styles.containerItem}>
+                  {page === 5 && (
+                    <div>
+                      <AmbulatorioFormFifthPage
+                        previousPage={this.previousPage}
+                        onSubmit={onSubmit}
+                        PacienteNombre = {this.props.PacienteNombre}
+                        pacienteCI = {this.props.pacienteCI}
+                        TitularNombre = {this.props.TitularNombre}
+                        titularCI = {this.props.titularCI}
+                      />
+                      </div>
+                    )}
+                </Tab.Pane>
+                <Tab.Pane eventKey="6" style={ styles.containerItem}>
+                  {page === 6 && (
+                    <AmbulatorioFormSixthPage
+                      previousPage={this.previousPage}
+                      onSubmit={onSubmit}
+                      PacienteNombre = {this.props.PacienteNombre}
+                      pacienteCI = {this.props.pacienteCI}
+                      TitularNombre = {this.props.TitularNombre}
+                      titularCI = {this.props.titularCI}
+                    />
+                  )}
+                </Tab.Pane>
+                <Tab.Pane eventKey="7" style={ styles.containerItem}>
+                  {page === 7 && (
+                    <VentanaForm
+                      previousPage={this.previousPage}
+                      onSubmit={onSubmit}
+                      PacienteNombre = {this.props.PacienteNombre}
+                      pacienteCI = {this.props.pacienteCI}
+                      TitularNombre = {this.props.TitularNombre}
+                      titularCI = {this.props.titularCI}
+                    />
+                  )}
+                </Tab.Pane>
+                <Tab.Pane eventKey="8" style={ styles.containerItem}>
+                {page === 8 && (
+                  <div>
+                            <h1>Ambulatorio</h1>
+                            
+                          <h2>Nuevos identificadores del Paciente:</h2>
+                          <h5 >Por favor, copie los siguientes códigos uno a uno</h5>
+                          <ul>
+                                <li>{this.props.pacienteCI}</li>
+                                <li>{this.props.patientService}</li>
+                          </ul>
+                          <h5 >Por favor, en el formulario de abajo; pegue uno a uno los códigos que copió en los recuadros con nombre PatientID, clic en Continue, seleccione el rectángulo de datos del paciente de la izquierda y clic en Yes, continue. Es importante que al pegar los códigos no repita en los 2 recuadros un mismo código</h5>
+                          <label>Dé clic cuando ya haya hecho los pasos anteriores</label><button onClick={this.handleClickContinuar}>CONTINUAR</button>
+                          <OpenMRSView url={enlace} esilos={this.estilos}/>
+                    </div>
+                )}
+                </Tab.Pane>
+              </Tab.Content>
+            </Col>
+          </Row>
+        </Tab.Container>
          
       </div>
     );

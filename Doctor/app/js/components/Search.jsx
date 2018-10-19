@@ -38,12 +38,12 @@ export default class Search extends React.Component {
                       <FormControl.Feedback/>
                     </Col>                             
                 </FormGroup> 
-                <Col md={12}>
-                      <Button bsStyle="success" style={ styles.button } onClick={this.props.handleClickSearch}>BUSCAR</Button>                            
-                    </Col>
+                  <Col md={12}>
+                    <Button bsStyle="success" style={ styles.button } onClick={this.props.handleClickSearch}>BUSCAR</Button>                            
+                  </Col>
                 </Panel.Body>
-                </Panel>
-                </Form>
+              </Panel>
+            </Form>
            
            {/* <input type="text" value={this.props.state.ID} onChange={this.props.handleChangeID}/> */}
             {/* <button onClick={this.props.handleClickSearch}>BUSCAR</button>         */}

@@ -1,16 +1,10 @@
-/* * This Source Code Form is subject to the terms of the Mozilla Public License,
- * v. 2.0. If a copy of the MPL was not distributed with this file, You can
- * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
- * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
- * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
- * graphic logo is a trademark of OpenMRS Inc.
- */
 import React from 'react';
 import apiCall from '../utilities/apiHelper';
 import {SEGURO_UUID} from '../utilities/constants';
 import DatosPreliminares from './DatosPreliminares';
-import { Col, Label, MenuItem, Button, Form, FormControl, HelpBlock, FormGroup, ControlLabel, Modal, Panel, ButtonToolbar, Table } from "react-bootstrap"
+import { Col, Label, Button, Form, FormControl, FormGroup, ControlLabel, Panel } from "react-bootstrap"
+import "./AmbulatorioInicio.css"
+
 export default class AmbulatorioInicio extends React.Component {
 
     constructor(props) {
@@ -112,9 +106,7 @@ export default class AmbulatorioInicio extends React.Component {
           
           
       });
-    }
-    
-    
+    }  
 
     componentDidMount(){
         apiCall(null,'get',`/appui/session`).then((result) => {
@@ -137,8 +129,9 @@ export default class AmbulatorioInicio extends React.Component {
                 marginBottom: 5
             },
             error: {
-                marginTop: 28,
-                fontSize: "20px",
+                marginTop: 18,
+                fontSize: "18px",
+                padding: "10px",
                 width: "100%", 
                 float: "left"
             },
@@ -148,8 +141,7 @@ export default class AmbulatorioInicio extends React.Component {
                 borderBottom: "1px solid silver"
             },
             button: {
-                width: '100%',
-                marginTop: 28
+                width: '100%'
             },
             buttonIESS: {
                 width: '25%',
@@ -164,78 +156,80 @@ export default class AmbulatorioInicio extends React.Component {
         if(this.state.seguro==""){
             return (
             <div>
-                
-                {/* <h1>Ambulatorio</h1> */}
-                {/* <h3>Búsqueda de Paciente</h3> */}
-                {/* <h2>Buscar el paciente por su código de Atención</h2> */}
-                {/* <h5>Ingresar el código de Atención</h5>
-                <input type="text" value={this.state.patient} onChange={this.handleChange}/>
-                <br></br>
-                <button onClick={this.handleClick}> BUSCAR</button> */}
+                <Form horizontal>
+                    <FormGroup>
+                        <Col md={3}/>
+                        <Col md={6}>
+                            <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Búsqueda de Paciente</Label></h1>
+                            <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
+                        </Col>    
+                    </FormGroup>
 
-                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Búsqueda de Paciente</Label></h1>
-                <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
-                <Form>
-                    <Panel bsStyle="info">
-                        <Panel.Body>
-                        <FormGroup controlId="variableID">
-                            <Col md={12}>
-                                <ControlLabel style={ styles.sizeFields }>Ingresar el código de atención</ControlLabel>
-                                {""}
-                                <FormControl data-id="" type="text" value={this.state.patient} onChange={this.handleChange}/>
-                                <FormControl.Feedback/>
-                            </Col>                             
-                        </FormGroup> 
-                        <Col md={12}>
-                            <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                    <FormGroup>
+                        <Col md={3}/>
+                        <Col md={6}>
+                            <Panel bsStyle="info">
+                                <Panel.Body>
+                                        <FormGroup controlId="variableID">
+                                            <Col md={12}>
+                                                <ControlLabel style={ styles.sizeFields }>Ingresar el código de atención</ControlLabel>
+                                                {""}
+                                                <FormControl data-id="" type="text" value={this.state.patient} onChange={this.handleChange}/>
+                                                <FormControl.Feedback/>
+                                            </Col>                             
+                                        </FormGroup> 
+                                        <FormGroup>
+                                            <Col md={12}>
+                                                <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                                            </Col>
+                                        </FormGroup>
+                                </Panel.Body>
+                            </Panel>
                         </Col>
-                        </Panel.Body>
-                    </Panel>
+                    </FormGroup>
                 </Form>
-                
           </div>
         )}
         if(this.state.seguro=="error"){
             return(
             <div>
-                {/* <h1>Ambulatorio</h1>
-                <h2>Registrar Ambulatorio</h2>
-                <h3>Código del Paciente</h3>
                 
-                <input type="text" value={this.state.patient} onChange={this.handleChange}/>
-                <br></br>
-                <button onClick={this.handleClick}> BUSCAR DE NUEVO</button>
+                <Form horizontal>
+                    <FormGroup>
+                        <Col md={3}/>
+                        <Col md={6}>
+                            <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Registrar Ambulatorio</Label></h1>
+                            <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
+                        </Col>    
+                    </FormGroup>
                 
-                <h2>NO SE HA ENCONTRADO RESULTADOS</h2> */}
-                
-                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Registrar Ambulatorio</Label></h1>
-                <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
-                
-                <Panel bsStyle="info">
-                    <Panel.Body>
-                        <Form>
-                            <FormGroup>
-                                <Col md={12}>
-                                    <ControlLabel style={ styles.sizeFields }>Código de Paciente</ControlLabel>
-                                    {""}
-                                    <FormControl data-id="" type="text" value={this.state.patient} onChange={this.handleChange}/>
-                                    <FormControl.Feedback/>
-                                </Col>                             
-                            </FormGroup> 
-                        </Form>
-                        
-                        <Col md={12}>
-                            <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                    <FormGroup>
+                        <Col md={3}/>
+                        <Col md={6}>
+                            <Panel bsStyle="info">
+                                <Panel.Body>
+                                        <FormGroup controlId="variableID">
+                                            <Col md={12}>
+                                                <ControlLabel style={ styles.sizeFields }>Código de Paciente</ControlLabel>
+                                                {""}
+                                                <FormControl data-id="" type="text" value={this.state.patient} onChange={this.handleChange}/>
+                                                <FormControl.Feedback/>
+                                            </Col>                             
+                                        </FormGroup> 
+                                        <FormGroup>
+                                            <Col md={12}>
+                                                <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                                            </Col>
+                                            
+                                            <Col md={12}>
+                                                <div ><Label bsStyle="danger" style={ styles.error }>NO SE HAN ENCONTRADO RESULTADOS</Label></div>
+                                            </Col>
+                                        </FormGroup>
+                                </Panel.Body>
+                            </Panel>
                         </Col>
-                        
-                        <Col md={12}>
-                            <div ><Label bsStyle="danger" style={ styles.error }>NO SE HAN ENCONTRADO RESULTADOS</Label></div>
-                        </Col>
-                        
-                    </Panel.Body>
-                </Panel>
-                
-                
+                    </FormGroup>
+                </Form>
                 
           </div>
           );
@@ -250,77 +244,89 @@ export default class AmbulatorioInicio extends React.Component {
                 <input type="text" value={this.state.patient} onChange={this.handleChange}/>
                 <br></br>
                 <button onClick={this.handleClick}> BUSCAR DE NUEVO</button> */}
-                
-                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Registrar Ambulatorio</Label></h1>
-                <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
-                <Form>
-                    <Panel bsStyle="info">
-                        <Panel.Body>
-                        <FormGroup>
-                            <Col md={12}>
-                                <ControlLabel style={ styles.sizeFields }>Código de Paciente</ControlLabel>
-                                {""}
-                                <FormControl data-id="" type="text" value={this.state.patient} onChange={this.handleChange}/>
-                                <FormControl.Feedback/>
-                            </Col>                             
-                        </FormGroup> 
-                        <Col md={12}>
-                            <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                <Form horizontal>
+                    <FormGroup>
+                        <Col md={3}/>
+                        <Col md={6}>
+                            <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Registrar Ambulatorio</Label></h1>
+                            <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
                         </Col>
-                        </Panel.Body>
-                    </Panel>
+                    </FormGroup>
+                    <FormGroup>
+                        <Col md={3}/>
+                        <Col md={6}>
+                            <Panel bsStyle="info">
+                                <Panel.Body>
+                                    <FormGroup>
+                                        <Col md={12}>
+                                            <ControlLabel style={ styles.sizeFields }>Código de Paciente</ControlLabel>
+                                            {""}
+                                            <FormControl data-id="" type="text" value={this.state.patient} onChange={this.handleChange}/>
+                                            <FormControl.Feedback/>
+                                        </Col>                             
+                                    </FormGroup> 
+                                    <FormGroup>
+                                        <Col md={12}>
+                                            <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                                        </Col>
+                                    </FormGroup>
+                                </Panel.Body>
+                            </Panel>
+                        </Col>
+                    </FormGroup>
+
+                    <hr/>
+
+                    <Col md={12}>
+                        <Panel bsStyle="info">
+                            <Panel.Heading>
+                                <Panel.Title componentClass="h3">Resultado </Panel.Title>
+                            </Panel.Heading>
+                            <Panel.Body>
+                                {/* <h2>Paciente marcado como aspirante Seguro {this.state.seguro} por el Doctor</h2>
+                                <h5>Doctor Responsable: </h5><h4>{this.state.provider}</h4>
+                                <br></br> */}
+                                
+                                <h3 style={ styles.marginTitulo2 }><b>Paciente marcado como aspirante por el Doctor</b></h3>
+
+                                <h5>
+                                    <Col md={3}>Seguro:</Col>
+                                    <Col md={3}>{this.state.seguro}</Col>
+                                </h5>
+                                <br></br>
+                                <h5>
+                                    <Col md={3}>Doctor responsable:</Col>
+                                    <Col md={3}>{this.state.provider}</Col>
+                                </h5>
+                                <br></br><br></br>
+                                <div>
+                                    <DatosPreliminares datos={this.state.preliminares}/>
+
+                                    {/* <a href="https://www.iess.gob.ec/calificacion-web/pages/public/calificacionAtencion.jsf" target="_blank">
+                                        <button> VER SI APLICA IESS</button>
+                                    </a> */}
+                                    <a href="https://www.iess.gob.ec/calificacion-web/pages/public/calificacionAtencion.jsf" target="_blank">
+                                        <Button style={ styles.buttonIESS }>VER SI APLICA IESS</Button>                            
+                                    </a>
+                                    
+                                    {/* <a href="https://aplicaciones.msp.gob.ec/coresalud/app.php/publico/rpis/afiliacion/consulta" target="_blank">
+                                        <button onClick={this.handleClick}> VER SI APLICA IESS-MSP</button>
+                                    </a> */}
+                                    <a href="https://aplicaciones.msp.gob.ec/coresalud/app.php/publico/rpis/afiliacion/consulta" target="_blank">
+                                        <Button style={ styles.buttonIESS }>VER SI APLICA IESS-MSP</Button>                            
+                                    </a>
+                                </div>
+                                <br></br>
+                                <h3 style={ styles.marginTitulo2 }><b>Marcar si el paciente aplica al seguro</b></h3>
+
+                                {/* <button onClick={this.handleAplica}> APLICA</button>
+                                <button onClick={this.handleNoAplica}> NO APLICA</button> */}
+                                <Button style={ styles.buttonIESS } onClick={this.handleAplica}>APLICA</Button>
+                                <Button style={ styles.buttonIESS } onClick={this.handleNoAplica}>NO APLICA</Button>
+                            </Panel.Body>
+                        </Panel>
+                    </Col>
                 </Form>
-                
-                <hr/>
-
-                <Panel bsStyle="info">
-                    <Panel.Heading>
-                        <Panel.Title componentClass="h3">Resultado </Panel.Title>
-                    </Panel.Heading>
-                    <Panel.Body>
-                        {/* <h2>Paciente marcado como aspirante Seguro {this.state.seguro} por el Doctor</h2>
-                        <h5>Doctor Responsable: </h5><h4>{this.state.provider}</h4>
-                        <br></br> */}
-                        
-                        <h3 style={ styles.marginTitulo2 }><b>Paciente marcado como aspirante por el Doctor</b></h3>
-
-                        <h5>
-                            <Col md={3}>Seguro:</Col>
-                            <Col md={3}>{this.state.seguro}</Col>
-                        </h5>
-                        <br></br>
-                        <h5>
-                            <Col md={3}>Doctor responsable:</Col>
-                            <Col md={3}>{this.state.provider}</Col>
-                        </h5>
-                        <br></br><br></br>
-                        <div>
-                            <DatosPreliminares datos={this.state.preliminares}/>
-
-                            {/* <a href="https://www.iess.gob.ec/calificacion-web/pages/public/calificacionAtencion.jsf" target="_blank">
-                                <button> VER SI APLICA IESS</button>
-                            </a> */}
-                            <a href="https://www.iess.gob.ec/calificacion-web/pages/public/calificacionAtencion.jsf" target="_blank">
-                                <Button bsStyle="success" style={ styles.buttonIESS }>VER SI APLICA IESS</Button>                            
-                            </a>
-                            
-                            {/* <a href="https://aplicaciones.msp.gob.ec/coresalud/app.php/publico/rpis/afiliacion/consulta" target="_blank">
-                                <button onClick={this.handleClick}> VER SI APLICA IESS-MSP</button>
-                            </a> */}
-                            <a href="https://aplicaciones.msp.gob.ec/coresalud/app.php/publico/rpis/afiliacion/consulta" target="_blank">
-                                <Button bsStyle="success" style={ styles.buttonIESS }>VER SI APLICA IESS-MSP</Button>                            
-                            </a>
-                        </div>
-                        <br></br>
-                        <h3 style={ styles.marginTitulo2 }><b>Marcar si el paciente aplica al seguro</b></h3>
-
-                        {/* <button onClick={this.handleAplica}> APLICA</button>
-                        <button onClick={this.handleNoAplica}> NO APLICA</button> */}
-                        <Button bsStyle="success" style={ styles.buttonIESS } onClick={this.handleAplica}>APLICA</Button>
-                        <Button bsStyle="success" style={ styles.buttonIESS } onClick={this.handleNoAplica}>NO APLICA</Button>
-                    </Panel.Body>
-                </Panel>
-
           </div>
           );
         }

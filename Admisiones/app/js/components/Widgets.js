@@ -6,23 +6,32 @@ import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import Combobox from 'react-widgets/lib/Combobox';
 import moment from 'moment';
 import momentLocaliser from 'react-widgets-moment';
+import { FormControl } from "react-bootstrap"
 
 import 'react-widgets/dist/css/react-widgets.css';
 
 momentLocaliser(moment);
 
+const styles = {
+  sizeFields: {
+    fontSize: '13px',
+    width: '100%'
+  }
+};
 
 const renderDropdownList = ({ input, data, valueField, textField, label, placeholder, defaultValue }) =>(
   <div>
-  <label>{label}</label>
-  <DropdownList {...input}
-    data={data}
-    valueField={valueField}
-    textField={textField}
-    placeholder={placeholder}
-    defaultValue={defaultValue}
-    onChange={input.onChange} />
-    </div>);
+    <label style={ styles.sizeFields }>{label}</label>
+    <DropdownList {...input}
+      style={ styles.sizeFields }
+      data={data}
+      valueField={valueField}
+      textField={textField}
+      placeholder={placeholder}
+      defaultValue={defaultValue}
+      onChange={input.onChange} />
+  </div>
+);
 
 const renderMultiselect = ({ input, data, valueField, textField }) =>
   <Multiselect {...input}
@@ -60,9 +69,10 @@ const renderCombobox = ({ input, data, disables, defaultValue, placeholder, labe
     
 const renderField = ({ input, label, type, placeholder, style, meta: { touched, error } }) => (
   <div>
-    <label style={style}>{label}</label>
+    <label style={ styles.sizeFields }>{label}</label>
     <div>
-      <input  {...input} placeholder={placeholder} type={type} />
+      <FormControl {...input} style={ styles.sizeFields } placeholder={placeholder} type={type}/>
+      {/* <input  {...input} style={ styles.sizeFields } placeholder={placeholder} type={type} /> */}
       {touched && error && <span>{error}</span>}
     </div>
   </div>
@@ -71,9 +81,10 @@ const renderField = ({ input, label, type, placeholder, style, meta: { touched, 
 
 const renderField2 = ({ input, label, type,width, placeholder,value ,onKeyPress,meta: { touched, error } }) => (
   <div>
-    <label>{label}</label>
+    <label style={ styles.sizeFields }>{label}</label>
     <div>
-      <input {...input} placeholder={placeholder} width={width} onKeyPress={(refName)=>{onKeyPress(refName)}} type={type} />
+      <FormControl {...input} style={ styles.sizeFields } placeholder={placeholder} width={width} onKeyPress={(refName)=>{onKeyPress(refName)}} type={type} />
+      {/* <input {...input} style={ styles.sizeFields } placeholder={placeholder} width={width} onKeyPress={(refName)=>{onKeyPress(refName)}} type={type} /> */}
       {touched && error && <span>{error}</span>}
     </div>
   </div>
