@@ -1,3 +1,7 @@
+hr {
+    border-color: silver
+}
+
 .sideBarMenuContainer {
     position: fixed;
     height: 100%;

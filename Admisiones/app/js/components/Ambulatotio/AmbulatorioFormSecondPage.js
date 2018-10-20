@@ -26,7 +26,10 @@ const AmbulatorioFormSecondPage = props => {
 		button: {
 		  width: '100%',
 		  marginTop: "3px"
-		}
+		}, 
+		marginLeft20: {
+			marginLeft: 20
+		} 
     };
 
   	return (
@@ -37,8 +40,8 @@ const AmbulatorioFormSecondPage = props => {
 			{/* Verifique y complete datos */}
 			<h3 style={ styles.marginTitulo2 }><b>Verifique y complete datos</b></h3>
 			<form onSubmit={handleSubmit}>
-				<div id="DatosPersonales" className="seccion">
-				
+
+				<div style={ styles.marginLeft20 }>
 					{/* Cédula */}
 					<Row>
 						<Col md={3}>
@@ -188,8 +191,8 @@ const AmbulatorioFormSecondPage = props => {
 					</Row>
 				</div>
 
-				<div id="DatosDomicilio" className="seccion">
-					<h3 style={ styles.marginTitulo2 }><b>Información Domiciliaria</b></h3>
+				<h3 style={ styles.marginTitulo2 }><b>Información Domiciliaria</b></h3>
+				<div style={ styles.marginLeft20 }>
 					<Row>
 						{/* Provincia */}
 						<Col  md={3}>
@@ -288,6 +291,7 @@ const AmbulatorioFormSecondPage = props => {
 						</Col>
 					</Row>
 				</div>
+
 				<hr></hr>
 				<Col md={3}></Col>
 				<Col md={6}>

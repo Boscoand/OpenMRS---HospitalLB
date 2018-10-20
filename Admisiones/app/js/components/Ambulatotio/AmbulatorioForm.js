@@ -34,7 +34,7 @@ class AmbulatorioForm extends Component {
       titular:{},
       titularId:"",
       paciente:{},
-      enlace: `http://200.10.147.155:8080/openmrs/coreapps/datamanagement/mergePatients.page?app=coreapps.mergePatients`
+      enlace: `http://localhost:8080/openmrs/coreapps/datamanagement/mergePatients.page?app=coreapps.mergePatients`
     };
   }
   
@@ -182,8 +182,25 @@ class AmbulatorioForm extends Component {
       }, 
       inputSecondPage: {
         zIndex: 1
+      },
+      marginTitulo2: {
+        marginTop: 25,
+          marginBottom: 25,
+          borderBottom: "1px solid silver"
+      },
+      button: {
+        width: '100%',
+        marginTop: "3px"
+      }, 
+      marginLeft20: {
+        marginLeft: 20
+      },
+      marginTitulo3: {
+        marginTop: 30,
+        textDecoration: "underline silver"
       }
     };
+    
     return (
       
       <div>
@@ -330,18 +347,16 @@ class AmbulatorioForm extends Component {
                 <Tab.Pane eventKey="8" style={ styles.containerItem}>
                 {page === 8 && (
                   <div>
-                            <h1>Ambulatorio</h1>
-                            
-                          <h2>Nuevos identificadores del Paciente:</h2>
-                          <h5 >Por favor, copie los siguientes códigos uno a uno</h5>
-                          <ul>
-                                <li>{this.props.pacienteCI}</li>
-                                <li>{this.props.patientService}</li>
-                          </ul>
-                          <h5 >Por favor, en el formulario de abajo; pegue uno a uno los códigos que copió en los recuadros con nombre PatientID, clic en Continue, seleccione el rectángulo de datos del paciente de la izquierda y clic en Yes, continue. Es importante que al pegar los códigos no repita en los 2 recuadros un mismo código</h5>
-                          <label>Dé clic cuando ya haya hecho los pasos anteriores</label><button onClick={this.handleClickContinuar}>CONTINUAR</button>
-                          <OpenMRSView url={enlace} esilos={this.estilos}/>
-                    </div>
+                    <h3 style={ styles.marginTitulo2 }><b>Nuevos identificadores del Paciente:</b></h3>
+                    <h5 style={ styles.marginTitulo3 }>Por favor, copie los siguientes códigos uno a uno: </h5>
+                    <ul>
+                          <li>{this.props.pacienteCI}</li>
+                          <li>{this.props.patientService}</li>
+                    </ul>
+                    <h5 >Por favor, en el formulario de abajo; pegue uno a uno los códigos que copió en los recuadros con nombre PatientID, clic en Continue, seleccione el rectángulo de datos del paciente de la izquierda y clic en Yes, continue. Es importante que al pegar los códigos no repita en los 2 recuadros un mismo código</h5>
+                    <OpenMRSView url={enlace} esilos={this.estilos}/>
+                    <label>Dé clic cuando ya haya hecho los pasos anteriores</label><button onClick={this.handleClickContinuar}>CONTINUAR</button>
+                  </div>
                 )}
                 </Tab.Pane>
               </Tab.Content>

@@ -14,7 +14,7 @@ momentLocaliser(moment);
 
 const styles = {
   sizeFields: {
-    fontSize: '13px',
+    fontSize: '14px',
     width: '100%'
   }
 };

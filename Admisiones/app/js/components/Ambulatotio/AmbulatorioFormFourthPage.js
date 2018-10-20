@@ -18,93 +18,105 @@ const renderError = ({ meta: { touched, error } }) =>
       button: {
         width: '100%',
         marginTop: "3px"
+      },
+      marginLeft20: {
+        marginLeft: 20
       }
-  }
+    }
   return (
     <div>
     
       <h3 style={ styles.marginTitulo2 }><b>Datos del Paciente</b></h3>
-      <h5>
-        <Col md={3}><b>Nombre:</b></Col>
-        <Col md={6}>{props.PacienteNombre+" "}</Col>
-      </h5>
-      <br></br>
-      <h5>
-        <Col md={3}><b>Cédula:</b></Col>
-        <Col md={6}>{props.pacienteCI}</Col>
-      </h5>
-      <br></br>
       
+      <div style={ styles.marginLeft20 }>
+        <Row>
+          <h5>
+            <Col md={3}><b>Nombre:</b></Col>
+            <Col md={6}>{props.PacienteNombre+" "}</Col>
+          </h5>
+        </Row>
+      
+        <Row>
+          <h5>
+            <Col md={3}><b>Cédula:</b></Col>
+            <Col md={6}>{props.pacienteCI}</Col>
+          </h5>
+        </Row>
+      </div>
+
       <h3 style={ styles.marginTitulo2 }><b>Datos del Titular</b></h3>
-      <h5>
-        <Col md={3}><b>Nombre:</b></Col>
-        <Col md={6}>{props.TitularNombre+" "}</Col>
-      </h5>
-      <br></br>
-      <h5>
-        <Col md={3}><b>Cédula:</b></Col>
-        <Col md={6}>{props.titularCI}</Col>
-      </h5>
-      <br></br>
-    
+      
+      <div style={ styles.marginLeft20 }>
+        <Row>
+          <h5>
+            <Col md={3}><b>Nombre:</b></Col>
+            <Col md={6}>{props.TitularNombre+" "}</Col>
+          </h5>
+        </Row>
+
+        <Row>
+          <h5>
+            <Col md={3}><b>Cédula:</b></Col>
+            <Col md={6}>{props.titularCI}</Col>
+          </h5>
+        </Row>
+      </div>
+
       <h3 style={ styles.marginTitulo2 }><b>Verifique y complete datos</b></h3>
-    
-      <div>
         <form onSubmit={handleSubmit}>
-        <div id="OtraInfo" className="seccion">
-          
-          <Row>
-            <Col xs ={6} md={3}>
-              <Field
-                name="padre"
-                type="text"
-                component={renderField}
-                label="Padre: "
-                placeholder="Halar del RC"
-              />
-            </Col>
-          </Row>
+      
+          <div style={ styles.marginLeft20 }>  
+            <Row>
+              <Col xs ={6} md={6}>
+                <Field
+                  name="padre"
+                  type="text"
+                  component={renderField}
+                  label="Padre: "
+                  placeholder="Halar del RC"
+                />
+              </Col>
+            </Row>
 
-          <Row>
-            <Col xs ={6} md={3}>
-              <Field
-                name="madre"
-                type="text"
-                component={renderField}
-                label="Madre: "
-                placeholder="Halar del RC"
-              />
-            </Col>
-          </Row>
+            <Row>
+              <Col xs ={6} md={6}>
+                <Field
+                  name="madre"
+                  type="text"
+                  component={renderField}
+                  label="Madre: "
+                  placeholder="Halar del RC"
+                />
+              </Col>
+            </Row>
 
-          <Row>
-            <Col xs ={6} md={3}>
-              <Field
-                name="conyuge"
-                type="text"
-                component={renderField}
-                label="Cónyuge: "
-                placeholder="Halar del RC"
-              />
-            </Col>
-          </Row>
+            <Row>
+              <Col xs ={6} md={6}>
+                <Field
+                  name="conyuge"
+                  type="text"
+                  component={renderField}
+                  label="Cónyuge: "
+                  placeholder="Halar del RC"
+                />
+              </Col>
+            </Row>
 
-        </div>
+          </div>
 
-        <hr></hr>
-        <Col md={3}></Col>
-        <Col md={6}>
-          <Button bsStyle="success" style={ styles.button } type="submit" className="next">GUARDAR</Button>                            
-        </Col>
+          <hr></hr>
+          <Col md={3}></Col>
+          <Col md={6}>
+            <Button bsStyle="success" style={ styles.button } type="submit" className="next">GUARDAR</Button>                            
+          </Col>
 
-        {guardado && (
-          <div style={{"color":"green",fontWeight: "bold"}}> LOS DATOS FUERON GUARDADOS EXITOSAMENTE</div>
-        )}
+          {guardado && (
+            <div style={{"color":"green",fontWeight: "bold"}}> LOS DATOS FUERON GUARDADOS EXITOSAMENTE</div>
+          )}
 
       </form>
     </div>
-</div>
- );
+  );
 };
 export default reduxForm({
   form: 'ambulatorio3', //Form name is same
