@@ -4,6 +4,7 @@ import validate from './validate';
 import { Button, Row, Col } from "react-bootstrap"
 import {renderDropdownList,renderField,renderField2,renderDateTimePicker, renderCombobox} from '../Widgets';
 import DatosPreliminares from '../DatosPreliminares';
+import '../../styles/button.css'
 
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? <span>{error}</span> : false;
@@ -45,7 +46,7 @@ const AmbulatorioFormThirdPage = props => {
 				<div style={ styles.marginLeft20 }>
 					{/* Cédula */}
 					<Row>
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Cedula"
 								type="text"
@@ -59,7 +60,7 @@ const AmbulatorioFormThirdPage = props => {
 
           <Row>
 						{/* Primer nombre */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Primer_Nombre"
 								type="text"
@@ -71,7 +72,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
             {/* Segundo nombre */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Segundo_Nombre"
 								type="text"
@@ -83,7 +84,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
             {/* Primer apellido */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Primer_Apellido"
 								type="text"
@@ -94,7 +95,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
             {/* Segundo apellido */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Segundo_Apellido"
 								type="text"
@@ -107,7 +108,7 @@ const AmbulatorioFormThirdPage = props => {
 
           <Row>
 						{/* Fecha de nacimiento */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Fecha_Nacimiento"
 								type="date"
@@ -118,7 +119,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
 						{/* Lugar de nacimiento */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Lugar_Nacimiento"
 								type="text"
@@ -128,7 +129,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
 						{/* Género */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field name="Genero" 
 								component={renderDropdownList}
 								label="Género"
@@ -138,11 +139,9 @@ const AmbulatorioFormThirdPage = props => {
 								placeholder="Seleccione género"
 							/>
 						</Col>
-					</Row>
 
-          <Row>
 						{/* Ocupacion */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Ocupacion"
 								type="text"
@@ -151,8 +150,11 @@ const AmbulatorioFormThirdPage = props => {
 							/>
 						</Col>
 
+					</Row>
+
+					<Row>
 						{/* Estado civil */}
-						<Col xs ={6} md={3}>
+						<Col md={6}>
 							<Field
 								name="Estado_Civil"
 								component={renderDropdownList}
@@ -166,7 +168,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
 						{/* Nacionalidad */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field name="Nacionalidad" 
 									component={renderDropdownList}
 									label="Nacionalidad"
@@ -178,7 +180,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
 						{/* Cultura Étnica */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field name="Cultura_Étnica" 
 									component={renderDropdownList}
 									label="Cultura Étnica"
@@ -195,7 +197,7 @@ const AmbulatorioFormThirdPage = props => {
         <div style={ styles.marginLeft20 }>
 					<Row>
 						{/* Provincia */}
-						<Col  md={3}>
+						<Col  md={6}>
 							<Field
 								name="Provincia"
 								component={renderDropdownList}
@@ -208,7 +210,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
 						{/* Ciudad */}
-						<Col xs ={6} md={3}>
+						<Col md={6}>
 							<Field name="Ciudad" 
 									component={renderDropdownList}
 									label="Ciudad"
@@ -220,7 +222,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
 						{/* Parroquia */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field name="Parroquia" 
 									component={renderDropdownList}
 									label="Parroquia"
@@ -245,7 +247,7 @@ const AmbulatorioFormThirdPage = props => {
 
 					<Row>
 						{/* Telefono */}
-						<Col md={3}>
+						<Col md={6}>
 						<Field
 							name="Telefono"
 							type="text"
@@ -256,7 +258,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 					
 						{/* Celular */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Celular"
 								type="text"
@@ -267,7 +269,7 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 
 						{/* Telefono 2 */}
-						<Col md={3}>
+						<Col md={6}>
 							<Field
 								name="Otro_telf"
 								type="text"
@@ -276,10 +278,7 @@ const AmbulatorioFormThirdPage = props => {
 								placeholder="Ingrese otro número"
 							/>
 						</Col>
-					</Row>
 
-					{/* Lugar de Trabajo */}
-					<Row>
 						<Col md={6}>
 							<Field
 								name="Lug_Trabajo"
@@ -291,11 +290,11 @@ const AmbulatorioFormThirdPage = props => {
 						</Col>
 					</Row>
 				</div>
-    
+				<br></br>
         <hr></hr>
 				<Col md={3}></Col>
         <Col md={6}>
-          <Button bsStyle="success" style={ styles.button } type="submit" className="next">GUARDAR</Button>                            
+          <Button bsStyle="success" style={ styles.button } type="submit" className="button">GUARDAR</Button>                            
         </Col>
 
         {guardado && (

@@ -84,7 +84,7 @@ export default class Paciente extends React.Component {
                     </Col>
 
                     <Col md={6}>
-                      <Button bsStyle="success" style={ styles.button } onClick={this.props.submit}>Guardar e Ingresar Vitales</Button>                            
+                      <Button bsStyle="success" style={ styles.button } onClick={this.props.submit}>GUARDAR E INGRESAR VITALES</Button>                            
                     </Col>
 
                   </FormGroup>      

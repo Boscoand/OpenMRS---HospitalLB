@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import validate from './validate';
 import { Row, Col, Button } from 'react-bootstrap';
 import { renderField } from '../Widgets';
+import '../../styles/button.css'
 
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? <span>{error}</span> : false;
@@ -107,7 +108,7 @@ const renderError = ({ meta: { touched, error } }) =>
           <hr></hr>
           <Col md={3}></Col>
           <Col md={6}>
-            <Button bsStyle="success" style={ styles.button } type="submit" className="next">GUARDAR</Button>                            
+            <Button bsStyle="success" style={ styles.button } type="submit" className="button">GUARDAR</Button>                            
           </Col>
 
           {guardado && (

@@ -4,6 +4,7 @@ import validate from './validate';
 import { Button, Col } from 'react-bootstrap';
 import { renderDropdownList, renderSelectList } from '../Widgets';
 import { Row } from 'react-flexbox-grid';
+import '../../styles/button.css'
 
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? <span>{error}</span> : false;
@@ -159,7 +160,7 @@ const AmbulatorioFormSixthPage = props => {
           <Row>
             <Col md={3}></Col>
             <Col md={6}>
-              <Button bsStyle="success" style={ styles.button } type="submit" className="next">GUARDAR</Button>                            
+              <Button bsStyle="success" style={ styles.button } type="submit" className="button">GUARDAR</Button>                            
             </Col>
           </Row>
 

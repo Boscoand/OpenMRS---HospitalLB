@@ -10,6 +10,7 @@ import OpenMRSView from '../openmrsView';
 import VentanaForm from './VentanaForm';
 import { Nav, NavItem, Tab, Row, Col, Form, FormControl, FormGroup, Button } from "react-bootstrap"
 import "./AmbulatorioFormStyle.css"
+import '../../styles/button.css'
 
 class AmbulatorioForm extends Component {
   constructor(props) {
@@ -198,7 +199,11 @@ class AmbulatorioForm extends Component {
       marginTitulo3: {
         marginTop: 30,
         textDecoration: "underline silver"
-      }
+      },
+      marginTitulo4: {
+        marginTop: 10,
+        marginBottom: 10
+      },
     };
     
     return (
@@ -212,7 +217,7 @@ class AmbulatorioForm extends Component {
                 <NavItem eventKey="1" onClick={this.page1} style={ styles.borderBottom }><b style={ styles.textFormat }>Datos Preliminares</b></NavItem>
                 <NavItem eventKey="2" onClick={this.page2} style={ styles.borderBottom }><b style={ styles.textFormat }>Titular</b></NavItem>
                 <NavItem eventKey="3" onClick={this.page3} style={ styles.borderBottom }><b style={ styles.textFormat }>Paciente</b></NavItem>
-                <NavItem eventKey="4" onClick={this.page4} style={ styles.borderBottom }><b style={ styles.textFormat }>Orta Información</b></NavItem>
+                <NavItem eventKey="4" onClick={this.page4} style={ styles.borderBottom }><b style={ styles.textFormat }>Otra Información</b></NavItem>
                 <NavItem eventKey="5" onClick={this.page5} style={ styles.borderBottom }><b style={ styles.textFormat }>Titular y 2° Progenitor</b></NavItem>
                 <NavItem eventKey="6" onClick={this.page6} style={ styles.borderBottom }><b style={ styles.textFormat }>Seguro y Cta. x Cobrar</b></NavItem>
                 <NavItem eventKey="7" onClick={this.page7} style={ styles.borderBottom }><b style={ styles.textFormat }>Ventana de Asistencia</b></NavItem>
@@ -242,7 +247,7 @@ class AmbulatorioForm extends Component {
                                   <FormControl type="text"/>
                               </Col>                             
                               <Col md={2}>
-                                  <Button bsStyle="success" style={ styles.button } onClick={this.props.handleTitularID}>BUSCAR</Button>                            
+                                  <Button bsStyle="success" className="button" style={ styles.button } onClick={this.props.handleTitularID}>BUSCAR</Button>                            
                               </Col>
                           </FormGroup>
                         </Form>
@@ -273,7 +278,7 @@ class AmbulatorioForm extends Component {
                                   <FormControl.Feedback/>
                               </Col>                             
                               <Col md={2}>
-                                  <Button bsStyle="success" style={ styles.button } onClick={this.props.handlepacienteId}>BUSCAR</Button>                            
+                                  <Button bsStyle="success" className="button" style={ styles.button } onClick={this.props.handlepacienteId}>BUSCAR</Button>                            
                               </Col>
                           </FormGroup>
                         </Form>
@@ -348,14 +353,32 @@ class AmbulatorioForm extends Component {
                 {page === 8 && (
                   <div>
                     <h3 style={ styles.marginTitulo2 }><b>Nuevos identificadores del Paciente:</b></h3>
-                    <h5 style={ styles.marginTitulo3 }>Por favor, copie los siguientes códigos uno a uno: </h5>
-                    <ul>
-                          <li>{this.props.pacienteCI}</li>
-                          <li>{this.props.patientService}</li>
-                    </ul>
-                    <h5 >Por favor, en el formulario de abajo; pegue uno a uno los códigos que copió en los recuadros con nombre PatientID, clic en Continue, seleccione el rectángulo de datos del paciente de la izquierda y clic en Yes, continue. Es importante que al pegar los códigos no repita en los 2 recuadros un mismo código</h5>
+                    <h5 style={ styles.marginTitulo3 }>Por favor, siga los siguientes pasos: </h5>
+                    
+                    <div style={ styles.marginLeft20 }>
+                      <h5 style={ styles.marginTitulo4 }><b>1.-</b> Copie los siguientes códigos uno a uno en los recuadros *Patient ID* ubicados en la ventana inferior: </h5>
+                      <ul>
+                            <li>{this.props.pacienteCI}</li>
+                            <li>{this.props.patientService}</li>
+                      </ul>
+                      <h5 style={ styles.marginTitulo4 }><b>2.-</b> Luego, presione el botón verde "Continue".</h5>
+                      <h5 style={ styles.marginTitulo4 }><b>3.-</b> Seleccione el rectángulo de datos del paciente de la izquierda y clic en Yes, continue.</h5>
+                    </div>  
+                    <h5 style={ styles.marginTitulo3 }><b>IMPORTANTE:</b> Los recuadros de Patient ID no pueden tener el mismo código</h5>
+                    
+                    <hr></hr>
+
                     <OpenMRSView url={enlace} esilos={this.estilos}/>
-                    <label>Dé clic cuando ya haya hecho los pasos anteriores</label><button onClick={this.handleClickContinuar}>CONTINUAR</button>
+
+                    <hr></hr>
+
+                    <Row>
+                      <Col md={3}></Col>
+                      <Col md={6}>
+                        <h5 style={ styles.marginTitulo4 }>Dé clic cuando ya haya hecho los pasos anteriores</h5>
+                        <Button bsStyle="success" style={ styles.button } type="submit" className="button" onClick={this.handleClickContinuar}>GUARDAR</Button>                            
+                      </Col>
+                    </Row>
                   </div>
                 )}
                 </Tab.Pane>

@@ -4,6 +4,7 @@ import {SEGURO_UUID} from '../utilities/constants';
 import DatosPreliminares from './DatosPreliminares';
 import { Col, Label, Button, Form, FormControl, FormGroup, ControlLabel, Panel } from "react-bootstrap"
 import "./AmbulatorioInicio.css"
+import '../styles/button.css'
 
 export default class AmbulatorioInicio extends React.Component {
 
@@ -180,7 +181,7 @@ export default class AmbulatorioInicio extends React.Component {
                                         </FormGroup> 
                                         <FormGroup>
                                             <Col md={12}>
-                                                <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                                                <Button bsStyle="success" className="button" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
                                             </Col>
                                         </FormGroup>
                                 </Panel.Body>
@@ -222,7 +223,7 @@ export default class AmbulatorioInicio extends React.Component {
                                             </Col>
                                             
                                             <Col md={12}>
-                                                <div ><Label bsStyle="danger" style={ styles.error }>NO SE HAN ENCONTRADO RESULTADOS</Label></div>
+                                                <div ><Label bsStyle="danger" className="button" style={ styles.error }>NO SE HAN ENCONTRADO RESULTADOS</Label></div>
                                             </Col>
                                         </FormGroup>
                                 </Panel.Body>
@@ -267,7 +268,7 @@ export default class AmbulatorioInicio extends React.Component {
                                     </FormGroup> 
                                     <FormGroup>
                                         <Col md={12}>
-                                            <Button bsStyle="success" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
+                                            <Button bsStyle="success" className="button" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>                            
                                         </Col>
                                     </FormGroup>
                                 </Panel.Body>

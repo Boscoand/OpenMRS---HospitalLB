@@ -14,7 +14,7 @@ export default class OpenMRSView extends React.Component {
                     <Navbar>
                         <Iframe url={this.props.url}
                             width="105%"
-                            height="450px"
+                            height="550px"
                             id="myId"
                             className="myClassname"
                             display="initial"
