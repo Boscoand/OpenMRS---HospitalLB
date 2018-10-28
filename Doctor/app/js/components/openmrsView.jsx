@@ -3,25 +3,19 @@ import { Nav, NavItem, Glyphicon, Button, Navbar, NavDropdown, MenuItem } from "
 import Iframe from 'react-iframe'
 export default class OpenMRSView extends React.Component {
     constructor(props) {
-        super(props);
-        
+        super(props);   
     }
-    
     render(){
         return(
-    <div>
-        
+            <div>
                 <Iframe url={this.props.url}
-                    width="120%"
-                    height="600px"
-                    id="myId"
-                    className="myClassname"
+                    width="100%"
+                    height="1580px"
                     display="block"
                     position="relative"
-                    allowFullScreen/>
-            
-    </div>
-            );
+                    allowFullScreen
+                />    
+            </div>
+        )
     }
-    
 }
