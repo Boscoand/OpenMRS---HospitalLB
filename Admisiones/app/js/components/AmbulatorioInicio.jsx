@@ -2,7 +2,7 @@ import React from 'react';
 import apiCall from '../utilities/apiHelper';
 import {SEGURO_UUID} from '../utilities/constants';
 import DatosPreliminares from './DatosPreliminares';
-import { Col, Label, Button, Form, FormControl, FormGroup, ControlLabel, Panel } from "react-bootstrap"
+import { Col, Label, Button, Form, FormControl, FormGroup, ControlLabel, Panel, Row } from "react-bootstrap"
 import "./AmbulatorioInicio.css"
 import '../styles/button.css'
 
@@ -138,8 +138,8 @@ export default class AmbulatorioInicio extends React.Component {
             },
             marginTitulo2: {
                 marginTop: 25,
+                borderBottom: "1px solid silver",
                 marginBottom: 25,
-                borderBottom: "1px solid silver"
             },
             button: {
                 width: '100%'
@@ -158,15 +158,15 @@ export default class AmbulatorioInicio extends React.Component {
             return (
             <div>
                 <Form horizontal>
-                    <FormGroup>
+                    <Row>
                         <Col md={3}/>
                         <Col md={6}>
                             <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Búsqueda de Paciente</Label></h1>
                             <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
                         </Col>    
-                    </FormGroup>
+                    </Row>
 
-                    <FormGroup>
+                    <Row>
                         <Col md={3}/>
                         <Col md={6}>
                             <Panel bsStyle="info">
@@ -187,7 +187,7 @@ export default class AmbulatorioInicio extends React.Component {
                                 </Panel.Body>
                             </Panel>
                         </Col>
-                    </FormGroup>
+                    </Row>
                 </Form>
           </div>
         )}
@@ -196,15 +196,15 @@ export default class AmbulatorioInicio extends React.Component {
             <div>
                 
                 <Form horizontal>
-                    <FormGroup>
+                    <Row>
                         <Col md={3}/>
                         <Col md={6}>
                             <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Registrar Ambulatorio</Label></h1>
                             <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
                         </Col>    
-                    </FormGroup>
+                    </Row>
                 
-                    <FormGroup>
+                    <Row>
                         <Col md={3}/>
                         <Col md={6}>
                             <Panel bsStyle="info">
@@ -229,7 +229,7 @@ export default class AmbulatorioInicio extends React.Component {
                                 </Panel.Body>
                             </Panel>
                         </Col>
-                    </FormGroup>
+                    </Row>
                 </Form>
                 
           </div>
@@ -246,14 +246,14 @@ export default class AmbulatorioInicio extends React.Component {
                 <br></br>
                 <button onClick={this.handleClick}> BUSCAR DE NUEVO</button> */}
                 <Form horizontal>
-                    <FormGroup>
+                    <Row>
                         <Col md={3}/>
                         <Col md={6}>
                             <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Registrar Ambulatorio</Label></h1>
                             <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
                         </Col>
-                    </FormGroup>
-                    <FormGroup>
+                    </Row>
+                    <Row>
                         <Col md={3}/>
                         <Col md={6}>
                             <Panel bsStyle="info">
@@ -274,7 +274,7 @@ export default class AmbulatorioInicio extends React.Component {
                                 </Panel.Body>
                             </Panel>
                         </Col>
-                    </FormGroup>
+                    </Row>
 
                     <hr/>
 
