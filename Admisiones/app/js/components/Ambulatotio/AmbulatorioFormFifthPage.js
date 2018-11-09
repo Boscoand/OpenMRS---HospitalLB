@@ -37,17 +37,15 @@ const AmbulatorioFormFifthPage = props => {
       
       <div style={ styles.marginLeft20 }>
         <Row>
-          <h5>
-            <Col md={3}><b>Nombre:</b></Col>
-            <Col md={6}>{props.TitularNombre+" "} </Col>
-          </h5>
+          <Col md={3}><h5><b>Nombre:</b></h5></Col>
+          <Col md={6}><h5>{props.TitularNombre+" "}</h5></Col>
         </Row>
       
         <Row>
-          <h5>
-            <Col md={3}><b>Cédula:</b></Col>
-            <Col md={6}>{props.titularCI}</Col>
-          </h5>
+        
+          <Col md={3}><h5><b>Cédula:</b></h5></Col>
+          <Col md={6}><h5>{props.titularCI}</h5></Col>
+        
         </Row>
       </div>  
 

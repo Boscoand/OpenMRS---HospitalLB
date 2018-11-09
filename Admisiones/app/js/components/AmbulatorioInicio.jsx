@@ -37,7 +37,6 @@ export default class AmbulatorioInicio extends React.Component {
     handleAplica(){
         this.props.saveSeguro("IESS");
         window.location.replace("#ambulatorio/datos");
-        
     }
 
 
@@ -223,7 +222,7 @@ export default class AmbulatorioInicio extends React.Component {
                                             </Col>
                                             
                                             <Col md={12}>
-                                                <div ><Label bsStyle="danger" className="button" style={ styles.error }>NO SE HAN ENCONTRADO RESULTADOS</Label></div>
+                                                <div ><Label bsStyle="danger" style={ styles.error }>NO SE HAN ENCONTRADO RESULTADOS</Label></div>
                                             </Col>
                                         </FormGroup>
                                 </Panel.Body>

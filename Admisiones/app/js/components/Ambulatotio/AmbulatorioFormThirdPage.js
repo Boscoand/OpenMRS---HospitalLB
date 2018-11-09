@@ -292,20 +292,25 @@ const AmbulatorioFormThirdPage = props => {
 				</div>
 				<br></br>
         <hr></hr>
-				<Col md={3}></Col>
-        <Col md={6}>
-          <Button bsStyle="success" style={ styles.button } type="submit" className="button">GUARDAR</Button>                            
-        </Col>
+				<Row>
+					<Col md={3}></Col>
+					<Col md={6}>
+						<Button bsStyle="success" style={ styles.button } type="submit" className="button">GUARDAR</Button>                            
+					</Col>
+				</Row>
+				<Row>
+					<Col md={12}>
+						{guardado && (
+							<div style={{ "color": "green", fontWeight: "bold", marginTop: 10 }}>LOS DATOS FUERON GUARDADOS EXITOSAMENTE</div>
+						)}
 
-        {guardado && (
-          <div style={{"color":"green",fontWeight: "bold"}}> LOS DATOS FUERON GUARDADOS EXITOSAMENTE</div>
-        )}
-
-        {errorT && (
-          errores.map(function(d, idx){
-            return (<li style={{"color":"red",fontWeight: "bold"}}> {d}</li>);
-          })
-        )} 
+						{errorT && (
+							errores.map(function(d, idx){
+								return (<li style={{"color":"red",fontWeight: "bold"}}> {d}</li>);
+							})
+						)} 
+					</Col>
+				</Row>
 
       </form>
 </div>

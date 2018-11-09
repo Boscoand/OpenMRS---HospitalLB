@@ -1,8 +1,6 @@
 import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { hashHistory } from "react-router"
-import { Nav, NavItem, Glyphicon, Button, Navbar, NavDropdown, MenuItem } from "react-bootstrap"
-import styles from "./Menu.css"
+import { Nav, NavItem, Tab, Row, Col, page, Label, TabContainer } from "react-bootstrap"
+import "./MenuStyle.css"
 
 class Menu extends Component {
 
@@ -31,27 +29,6 @@ class Menu extends Component {
     document.getElementById("sideBar").style.width = "0"
   }
 
-  // handleSelect(selectedKey) {
-  //   console.info("PROPS:", this.props)
-  //   this.props.changeSidebarOption(selectedKey)
-  //   switch (Number(selectedKey)) {
-  //     case 1: {
-  //       hashHistory.push("/triaje")
-  //       break
-  //     }
-  //     case 2: {
-  //       hashHistory.push("/ambulatorio")
-  //       break
-  //     }
-  //     case 3: {
-  //       this.props.toggleSidebar()
-  //       break
-  //     }
-  //     default:
-  //       hashHistory.push("/")
-  //   }
-  // }
-
   handleSelect(key) {
     this.setState({ keySelected : key })
     console.log(this.selectedOption)
@@ -59,42 +36,57 @@ class Menu extends Component {
 
   render() {
 
+    const styles = {      
+			navBar: {
+        display: "inline-block",
+        width: "100%",
+        marginTop: "15px"
+      }, 
+      borderBottom: {
+        borderBottom: "1px solid silver"
+      },
+      containerItem: {
+        margin: "10px"
+      },
+      containerNavLeft: {
+        borderRight: "1px solid silver",
+      },
+      textFormat: {
+        color: "#777"
+      },
+      button: {
+        width: '100%'
+      },
+      button: {
+        width: '100%',
+        marginTop: "3px"
+      },
+      marginTitulo: {
+        marginTop: 50
+      },
+      labelComplete: {
+        width: "100%", 
+        float: "left",
+        marginBottom: 5
+      }
+    };
+
     return (
 
       <div>
-
-        <Nav bsStyle="tabs" activeKey={ this.state.keySelected } onSelect={k => this.handleSelect(k)}>
-          {this.selectedOption}
-          <NavItem eventKey="1" href="#triaje">
-            <b>Triaje en Emergencia </b>
-          </NavItem>
-          <NavItem eventKey="2" href="#ambulatorio">
-            <b>Ambulatorio</b>
-          </NavItem>
-        </Nav>
         
-        {/* <Navbar fluid className="sidebar" inverse >
+        <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Doctor Emergencia</Label></h1>
 
-          <Navbar.Header>
-            <Navbar.Brand>
-        <a href="/openmrs">Bienvenido</a>
-            </Navbar.Brand>
-            
-          </Navbar.Header>
-
-          <Navbar>
-            <Navbar.Text className="userMenu">
-              <Navbar.Link onClick={this.goHome}><Glyphicon glyph="align-left" /></Navbar.Link>
-              <Navbar.Link onClick={this.logOut}><Glyphicon glyph="log-out" /></Navbar.Link>
-            </Navbar.Text>
-            <Nav activeKey={this.props.sidebarOption} onSelect={this.handleSelect} > */}
-              {/* <NavItem eventKey={3}><Glyphicon glyph="glyphicon glyphicon-remove" /> </NavItem> */}
-              {/* <NavItem eventKey={1} href="#triaje">Triaje</NavItem>
-              <NavItem eventKey={2} href="#ambulatorio">Ambulatorio</NavItem>
-            </Nav>
-          </Navbar>
-
-        </Navbar> */}
+        <Tab.Container className="selectedItem" style={ styles.navBar } id="tab-left" defaultActiveKey="1">
+          {/* <Row> */}
+            <Col sm={3} style={ styles.containerNavLeft }>
+              <Nav style={ styles.navBar } bsStyle="pills" stacked activeKey={ this.state.keySelected } onSelect={k => this.handleSelect(k)}>
+                <NavItem eventKey="1" href="#triaje" onClick={this.page1} style={ styles.borderBottom }><b style={ styles.textFormat }>Triaje en Emergencia</b></NavItem>
+                <NavItem eventKey="2" href="#ambulatorio" onClick={this.page2} style={ styles.borderBottom }><b style={ styles.textFormat }>Ambulatorio</b></NavItem>
+              </Nav>
+            </Col>
+        </Tab.Container>
+        
       </div>
 
     )

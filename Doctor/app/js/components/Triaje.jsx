@@ -13,6 +13,7 @@ var facilityVisit = FacilityVisit;
 var Vitals = VitalEncounter;
 
 export default class Ambulatorio extends React.Component {
+
     constructor(props) {
         super(props);
         this.cola={
@@ -50,17 +51,17 @@ export default class Ambulatorio extends React.Component {
             let resultados = result.results;
             let encuentros = resultados.map((visita)=>{
                 //Filtrar las visitas que sean de ambulatorio
-                    if(visita.visitType.uuid=="7b0f5697-27e3-40c4-8bae-f4049abfb4ed"){
-                        if(visita.encounters.length==1){
-                        //Extraer el id del encuentro de tipo Vitals
-                            if(visita.encounters[0].encounterType.uuid=="67a71486-1a54-468f-ac3e-7091a9a79584"){
-                            return visita.encounters[0].uuid; 
-                            }
+                if(visita.visitType.uuid=="7b0f5697-27e3-40c4-8bae-f4049abfb4ed"){
+                    if(visita.encounters.length==1){
+                    //Extraer el id del encuentro de tipo Vitals
+                        if(visita.encounters[0].encounterType.uuid=="67a71486-1a54-468f-ac3e-7091a9a79584"){
+                        return visita.encounters[0].uuid; 
                         }
                     }
-                    return "";
+                }
+                return "";
             }).filter(encuentro =>{
-                    return encuentro!=""; 
+                return encuentro!=""; 
             });
             var promises = encuentros.map(encuentro=>{
                 return apiCall(null,'get',`encounter/${encuentro}?v=full`).then((result) => {
@@ -120,7 +121,6 @@ export default class Ambulatorio extends React.Component {
             });
         });
     }
-  
   
     componentWillMount(){
         //Consultar las visitas activas
@@ -235,52 +235,63 @@ export default class Ambulatorio extends React.Component {
             },
             button: {
                 padding: 0
+            },
+            containerItem: {
+                margin: "10px"
+            }, 
+            containerRigth: {
+              marginTop: 20
             }
         }
 
         if(this.state.comenzar){
             return (
                 <div>
-                    <h1 style={ styles.marginTitulo }><Label>Lista de Pacientes</Label></h1>
-                    <h6 style={{color:"gray"}}>Hacer clic para ver el siguiente paciente</h6>
-                    <Panel bsStyle="info">
-                        <Panel.Body>
-                            <br></br>                             
-                            <OpenMRSView url={this.state.url}/>
-                        </Panel.Body>
-                    </Panel>
+                    <Col sm={3} ></Col>
+                    <Col sm={9} style={ styles.containerRigth }>
+                        <h4 style={{color:"gray"}}>Lista de Pacientes</h4>
+                        <h5 style={{color:"gray"}}>Hacer clic para ver el siguiente paciente</h5>
+                        <Panel bsStyle="info">
+                            <Panel.Body>
+                                <OpenMRSView url={this.state.url}/>
+                            </Panel.Body>
+                        </Panel>
+                    </Col>
                 </div>
             )
         }else{    
             return (
                 <div>
-                    <h1 style={ styles.marginTitulo }><Label>Lista de Pacientes</Label></h1>
-                    <h6 style={{color:"gray"}}>Hacer clic para ver el siguiente paciente</h6>
-                    <Panel bsStyle="info">
-                        <Panel.Body>
-                            <ReactTable
-                                data={this.state.data}
-                                columns={columns}
-                                loading = {this.state.loading}
-                                pageText= 'Página'
-                                previousText= 'Anterior'
-                                nextText= 'Siguiente'
-                                loadingText='Cargando...'
-                                noDataText= 'No hay pacientes en triaje'    
-                                getTdProps={(state, rowInfo, column, instance) => {
-                                    return {
-                                        onClick: (e, handleOriginal) => {
-                                            let patientInfo = rowInfo.original;
-                                            this.handlePatientClick(patientInfo.paciente,patientInfo.visita);
-                                            if (handleOriginal) {
-                                                handleOriginal();
+                    <Col sm={3} ></Col>
+                    <Col sm={9} style={ styles.containerRigth }>
+                        <h4 style={{color:"gray"}}>Lista de Pacientes</h4>
+                        <h5 style={{color:"gray"}}>Hacer clic para ver el siguiente paciente</h5>
+                        <Panel bsStyle="info">
+                            <Panel.Body>
+                                <ReactTable
+                                    data={this.state.data}
+                                    columns={columns}
+                                    loading = {this.state.loading}
+                                    pageText= 'Página'
+                                    previousText= 'Anterior'
+                                    nextText= 'Siguiente'
+                                    loadingText='Cargando...'
+                                    noDataText= 'No hay pacientes en triaje'    
+                                    getTdProps={(state, rowInfo, column, instance) => {
+                                        return {
+                                            onClick: (e, handleOriginal) => {
+                                                let patientInfo = rowInfo.original;
+                                                this.handlePatientClick(patientInfo.paciente,patientInfo.visita);
+                                                if (handleOriginal) {
+                                                    handleOriginal();
+                                                }
                                             }
                                         }
-                                    }
-                                }}
-                            />
-                        </Panel.Body>
-                    </Panel>
+                                    }}
+                                />
+                            </Panel.Body>
+                        </Panel>
+                    </Col>
                 </div>
             )
         }

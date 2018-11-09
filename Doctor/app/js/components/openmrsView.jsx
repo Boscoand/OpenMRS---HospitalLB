@@ -6,8 +6,15 @@ export default class OpenMRSView extends React.Component {
         super(props);   
     }
     render(){
+
+        const styles = {
+            marginTop20: {
+                marginTop: 20
+            }
+        }
+
         return(
-            <div>
+            <div style = { styles.marginTop20 }>
                 <Iframe url={this.props.url}
                     width="100%"
                     height="1580px"
