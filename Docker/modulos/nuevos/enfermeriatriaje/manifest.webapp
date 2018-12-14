@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "name": "EnfermeriaTriaje",
+  "description": "Toma de signos vitales para enfermera triaje",
+  "launch_path": "index.html",
+  "icons": {
+    "48": "/img/omrs-button.png"
+  },
+  "developer": {
+    "name": "drakamaleon",
+    "url": "https://github.com/drakamaleon/openmrs-owa-enfermeriatriaje"
+  },
+  "default_locale": "en",
+    "activities": {
+      "openmrs": {
+        "href": "*"
+      }
+    }
+}

@@ -1,0 +1,36 @@
+docker build -t "openmrs:prueba" .                                              					build con Docker file
+docker run -dti --name "nombre-contenedor" -d --link testsql:db -p 8080:8080 "openmrs:prueba"        Ejecutar imagen en contenedor
+
+docker exec -i -t <id_contenedor> /bin/bash                                     					Ingresar a contenedor
+
+docker images                                                                   					listar imagenes
+docker rmi $(docker images -q)                                                  					borrar todas las imagenes
+docker ps                                                                       					muestra los contenedores corriendo en la máquina
+docker stop $(docker ps -a -q)                                                  					parar contenedores
+docker rm $(docker ps -a -q)                                                    					borrar todos los contenedores
+
+docker run --name=testsql -e MYSQL_ROOT_PASSWORD=root -d mysql										Ejecutar contenedor con mysql
+
+docker inspect testsql																				Información sobre el contenedor especificado (se puede obtener la ip)
+
+docker start <nombre_contenedor>
+docker stop <nombre_contenedor>
+
+
+
+
+
+
+# Install MySql
+RUN yum -y install wget
+RUN wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+RUN rpm -ivh mysql-community-release-el7-5.noarch.rpm
+RUN yum update
+RUN yum install -y mysql-server
+RUN systemctl start mysqld
+RUN mkdir /root/docs
+ADD mysql_secure_installation.sh /root/docs/
+WORKDIR /root/docs
+RUN chmod +x mysql_secure_installation.sh
+RUN ./mysql_secure_installation.sh root
+
