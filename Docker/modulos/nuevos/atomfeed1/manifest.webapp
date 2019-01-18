@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "name": "sans",
+  "description": "Asignar un paciente a una cama",
+  "launch_path": "index.html",
+  "icons": {
+    "48": "/img/omrs-button.png"
+  },
+  "developer": {
+    "name": "KanonVintage",
+    "url": "https://github.com/KanonVintage/openmrs-owa-sans"
+  },
+  "default_locale": "en",
+    "activities": {
+      "openmrs": {
+        "href": "*"
+      }
+    }
+}
