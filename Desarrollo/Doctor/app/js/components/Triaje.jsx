@@ -29,7 +29,7 @@ export default class Ambulatorio extends React.Component {
         this.handlePatientClick = this.handlePatientClick.bind(this);
         this.addPat = this.addPat.bind(this);
         this.state = {
-            server : HOME,
+            server : "200.10.147.155:8081",
             patient:"",
             visit:"",
             form:"73376f0f-a248-4cda-8498-08be473284bd",
