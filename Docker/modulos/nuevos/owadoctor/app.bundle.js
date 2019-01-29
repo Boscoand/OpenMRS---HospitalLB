@@ -41384,7 +41384,7 @@ webpackJsonp([0],[
 	var PULSE_UUID = exports.PULSE_UUID = "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 	var ENCOUNTER_TYPE_UUID = exports.ENCOUNTER_TYPE_UUID = "67a71486-1a54-468f-ac3e-7091a9a79584";
 	var DEFAULT_PROVIDER = exports.DEFAULT_PROVIDER = "nurse";
-	var HOME = exports.HOME = "localhost:8080";
+	var HOME = exports.HOME = "200.10.147.155:8081";
 
 /***/ }),
 /* 571 */
@@ -41535,7 +41535,7 @@ webpackJsonp([0],[
 	        _this.handlePatientClick = _this.handlePatientClick.bind(_this);
 	        _this.addPat = _this.addPat.bind(_this);
 	        _this.state = {
-	            server: _constants.HOME,
+	            server: "200.10.147.155:8081",
 	            patient: "",
 	            visit: "",
 	            form: "73376f0f-a248-4cda-8498-08be473284bd",
@@ -41723,7 +41723,7 @@ webpackJsonp([0],[
 	                    }
 	                });
 	            });
-	            var url = 'http://' + this.state.server + '/openmrs/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=' + this.state.patient + '&visitId=' + this.state.visit + '&formUuid=' + this.state.form + '&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D' + this.state.patient + '%26';
+	            var url = 'http://200.10.147.155:8081/openmrs/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=' + this.state.patient + '&visitId=' + this.state.visit + '&formUuid=' + this.state.form + '&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D' + this.state.patient + '%26';
 	            this.setState({ "url": url });
 	        }
 	    }, {
@@ -41732,13 +41732,13 @@ webpackJsonp([0],[
 	            var obj = this.pat.dequeue();
 	            var patient = obj.paciente;
 	            var visita = obj.visita;
-	            var url = 'http://' + this.state.server + '/openmrs/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=' + patient + '&visitId=' + visita + '&formUuid=' + this.state.form + '&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D' + patient + '%26';
+	            var url = 'http://200.10.147.155:8081/openmrs/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=' + patient + '&visitId=' + visita + '&formUuid=' + this.state.form + '&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D' + patient + '%26';
 	            this.setState({ patient: patient, visit: visita, "url": url });
 	        }
 	    }, {
 	        key: 'handlePatientClick',
 	        value: function handlePatientClick(patientID, visitaID) {
-	            var url = 'http://' + this.state.server + '/openmrs/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=' + patientID + '&visitId=' + visitaID + '&formUuid=' + this.state.form + '&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D' + patientID + '%26';
+	            var url = 'http://200.10.147.155:8081/openmrs/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=' + patientID + '&visitId=' + visitaID + '&formUuid=' + this.state.form + '&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D' + patientID + '%26';
 	            this.setState({ patient: patientID, visit: visitaID, "url": url, comenzar: true });
 	        }
 	    }, {
@@ -41747,7 +41747,7 @@ webpackJsonp([0],[
 	            var obj = this.pat.dequeue();
 	            var patient = obj.paciente;
 	            var visita = obj.visita;
-	            var url = 'http://' + this.state.server + '/openmrs/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=' + patient + '&visitId=' + visita + '&formUuid=' + this.state.form + '&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D' + patient + '%26';
+	            var url = 'http://200.10.147.155:8081/openmrs/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=' + patient + '&visitId=' + visita + '&formUuid=' + this.state.form + '&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D' + patient + '%26';
 	            this.setState({ patient: patient, visit: visita, "url": url, comenzar: true });
 	        }
 	    }, {
