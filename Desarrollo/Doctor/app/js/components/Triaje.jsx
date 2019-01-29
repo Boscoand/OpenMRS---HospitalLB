@@ -249,7 +249,7 @@ export default class Ambulatorio extends React.Component {
                 <div>
                     <Col sm={3} ></Col>
                     <Col sm={9} style={ styles.containerRigth }>
-                        <h4 style={{color:"gray"}}>Lista de Pacientes</h4>
+                        <h4 style={{color:"gray"}}>Lista de Pacientes.</h4>
                         <h5 style={{color:"gray"}}>Hacer clic para ver el siguiente paciente</h5>
                         <Panel bsStyle="info">
                             <Panel.Body>
