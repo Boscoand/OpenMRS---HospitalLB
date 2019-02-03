@@ -41384,7 +41384,7 @@ webpackJsonp([0],[
 	var PULSE_UUID = exports.PULSE_UUID = "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 	var ENCOUNTER_TYPE_UUID = exports.ENCOUNTER_TYPE_UUID = "67a71486-1a54-468f-ac3e-7091a9a79584";
 	var DEFAULT_PROVIDER = exports.DEFAULT_PROVIDER = "nurse";
-	var HOME = exports.HOME = "localhost:8080";
+	var HOME = exports.HOME = "200.10.147.155:8081";
 
 /***/ }),
 /* 571 */
@@ -41535,7 +41535,7 @@ webpackJsonp([0],[
 	        _this.handlePatientClick = _this.handlePatientClick.bind(_this);
 	        _this.addPat = _this.addPat.bind(_this);
 	        _this.state = {
-	            server: _constants.HOME,
+	            server: "200.10.147.155:8081",
 	            patient: "",
 	            visit: "",
 	            form: "73376f0f-a248-4cda-8498-08be473284bd",
@@ -41786,7 +41786,7 @@ webpackJsonp([0],[
 	                        _react2.default.createElement(
 	                            'h4',
 	                            { style: { color: "gray" } },
-	                            'Lista de Pacientes'
+	                            'Lista de Pacientes.'
 	                        ),
 	                        _react2.default.createElement(
 	                            'h5',
