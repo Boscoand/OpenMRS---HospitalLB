@@ -160,7 +160,7 @@ export default class AmbulatorioInicio extends React.Component {
                     <Row>
                         <Col md={3}/>
                         <Col md={6}>
-                            <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Búsqueda de Paciente</Label></h1>
+                            <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Bússqqueda de Paciente</Label></h1>
                             <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
                         </Col>    
                     </Row>
