@@ -1,0 +1,4 @@
+{
+    "LOCAL_OWA_FOLDER": "/var/lib/OpenMRS/owa/",
+    "APP_ENTRY_POINT": "http://localhost:8080/openmrs/owa/doctor/index.html"
+}
