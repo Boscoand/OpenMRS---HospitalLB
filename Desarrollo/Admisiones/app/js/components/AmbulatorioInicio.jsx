@@ -24,11 +24,26 @@ export default class AmbulatorioInicio extends React.Component {
             provider:"",
             preliminares:{}
         };
+        this.aReportes = this.aReportes.bind(this);
+        this.aFormulario = this.aFormulario.bind(this);
+        this.reporte_params = {
+            cedula: ""
+        };
+        this.reporteRegistroRapido = this.reporteRegistroRapido.bind(this);
+        this.handleChange_cedula = this.handleChange_cedula.bind(this);
+        this.changeReporteTipo = this.changeReporteTipo.bind(this);
+        this.reporte_tipo = "";
     }
 
     handleChange(ev){
         this.setState({patient:ev.target.value});
     }
+
+    handleChange_cedula(ev){
+        console.log('change', this.reporte_params);
+        this.reporte_params.cedula += ev.target.value;
+    }
+
     handleNoAplica(){
         this.props.saveSeguro("NO IESS");
         window.location.replace(`#ambulatorio/datos`);
@@ -121,6 +136,25 @@ export default class AmbulatorioInicio extends React.Component {
 
     aReportes() {
         console.log('A REPORTES');
+        this.setState({seguro:"reportes"});
+    }
+
+    aFormulario() {
+        console.log('A FORMULARIO');
+        // this.setState({seguro:"formulario"});
+        // this.state = {seguro:"formulario"};
+        this.setState({seguro:"formulario"});
+    }
+
+    reporteRegistroRapido(){
+        console.log("reigstro rapido");
+        // this.reporte_params = {cedula: 'ddddd'};
+        console.log(this.reporte_params);
+    }
+
+    changeReporteTipo(tipo) {
+        this.reporte_tipo = tipo;
+        this.setState({seguro:"reportes"});
     }
 
     render() {
@@ -161,41 +195,296 @@ export default class AmbulatorioInicio extends React.Component {
         if(this.state.seguro==""){
             return (
             <div>
-                <Form horizontal>
-                    <Row>
-                        <Col md={3}/>
-                        <Col md={6}>
-                            <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Búsqueda de Paciente</Label></h1>
-                            <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col md={3}/>
-                        <Col md={6}>
-                            <Panel bsStyle="info">
-                                <Panel.Body>
-                                        <FormGroup controlId="variableID">
-                                            <Col md={12}>
-                                                <ControlLabel style={ styles.sizeFields }>Ingresar el código de atención</ControlLabel>
-                                                {""}
-                                                <FormControl data-id="" type="text" value={this.state.patient} onChange={this.handleChange}/>
-                                                <FormControl.Feedback/>
-                                            </Col>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Col md={12}>
-                                                <Button bsStyle="success" className="button" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>
-                                            </Col>
-                                        </FormGroup>
-                                </Panel.Body>
-                            </Panel>
-                            <Button bsStyle="secondary" className="button_reports" style={ styles.button } onClick={this.aReportes}>CREAR REPORTES - ADMISIONES</Button>
-                        </Col>
-                    </Row>
-                </Form>
-          </div>
+                <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={this.aReportes}>
+                Reportes
+                </Button>
+                <Button id="reportes" className="menu_button" style={ styles.button } onClick={this.aFormulario}>
+                Consultar paciente
+                </Button>
+            </div>
         )}
+        if((this.state.seguro=="reportes") && (this.reporte_tipo == "")){
+            return(
+                <div>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.changeReporteTipo("registro_rapido")}>
+                    Reporte Registro Rapido
+                    </Button>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.changeReporteTipo("reporte_rotulo")}>
+                    Reporte Rotulo
+                    </Button>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.changeReporteTipo("reporte_garantia")}>
+                    Reporte Garantia
+                    </Button>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.changeReporteTipo("reporte_hoja")}>
+                    Reporte Hoja de Ingreso
+                    </Button>
+                </div>
+            )
+        }
+        if(this.reporte_tipo == "registro_rapido") {
+            console.log("rapido!!!");
+            return(
+                <div>
+                    <Form horizontal>
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Reportes Registro Rapido</Label></h1>
+
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                            <h6 style={{color:"gray"}}>Reporte registro rapido</h6>
+                                <Panel bsStyle="info">
+                                    <Panel.Body>
+                                            <FormGroup controlId="variableID">
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Col md={12}>
+                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.reporteRegistroRapido}>Crear reporte</Button>
+                                                </Col>
+                                            </FormGroup>
+                                    </Panel.Body>
+                                </Panel>
+                            </Col>
+                        </Row>
+                    </Form>
+                </div>
+            )
+        }
+        if(this.reporte_tipo == "reporte_rotulo") {
+            console.log("rotulo!!!");
+            return(
+                <div>
+                    <Form horizontal>
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Reportes Rotulo</Label></h1>
+
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                            <h6 style={{color:"gray"}}>Reporte Rotulo</h6>
+                                <Panel bsStyle="info">
+                                    <Panel.Body>
+                                            <FormGroup controlId="variableID">
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese historia</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese convenio</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese medico</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Col md={12}>
+                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.reporteRegistroRapido}>Crear reporte</Button>
+                                                </Col>
+                                            </FormGroup>
+                                    </Panel.Body>
+                                </Panel>
+                            </Col>
+                        </Row>
+                    </Form>
+                </div>
+            )
+        }
+        if(this.reporte_tipo == "reporte_garantia") {
+            console.log("rotulo!!!");
+            return(
+                <div>
+                    <Form horizontal>
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Reportes Garantia</Label></h1>
+
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                            <h6 style={{color:"gray"}}>Reporte Garantia</h6>
+                                <Panel bsStyle="info">
+                                    <Panel.Body>
+                                            <FormGroup controlId="variableID">
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese nombre del Doctor encargado</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese nombre de persona garante</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula del garante</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese telefono del garante</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese trabajo del garante</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Col md={12}>
+                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.reporteRegistroRapido}>Crear reporte</Button>
+                                                </Col>
+                                            </FormGroup>
+                                    </Panel.Body>
+                                </Panel>
+                            </Col>
+                        </Row>
+                    </Form>
+                </div>
+            )
+        }
+        if(this.reporte_tipo == "reporte_hoja") {
+            console.log("rotulo!!!");
+            return(
+                <div>
+                    <Form horizontal>
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Reportes Hoja de Ingreso</Label></h1>
+
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                            <h6 style={{color:"gray"}}>Reporte Hoja de Ingreso</h6>
+                                <Panel bsStyle="info">
+                                    <Panel.Body>
+                                            <FormGroup controlId="variableID">
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese Nombre de Medico</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese Diagnostico</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingrese Diagnostico asociado</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Col md={12}>
+                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.reporteRegistroRapido}>Crear reporte</Button>
+                                                </Col>
+                                            </FormGroup>
+                                    </Panel.Body>
+                                </Panel>
+                            </Col>
+                        </Row>
+                    </Form>
+                </div>
+            )
+        }
+        if(this.state.seguro=="formulario"){
+            return(
+                <div>
+                    <Form horizontal>
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Búsqueda de Paciente</Label></h1>
+                                <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col md={3}/>
+                            <Col md={6}>
+                                <Panel bsStyle="info">
+                                    <Panel.Body>
+                                            <FormGroup controlId="variableID">
+                                                <Col md={12}>
+                                                    <ControlLabel style={ styles.sizeFields }>Ingresar el código de atención</ControlLabel>
+                                                    {""}
+                                                    <FormControl data-id="" type="text" value={this.state.patient} onChange={this.handleChange}/>
+                                                    <FormControl.Feedback/>
+                                                </Col>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Col md={12}>
+                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.handleClick}>BUSCAR</Button>
+                                                </Col>
+                                            </FormGroup>
+                                    </Panel.Body>
+                                </Panel>
+                            </Col>
+                        </Row>
+                    </Form>
+              </div>
+            )
+        }
         if(this.state.seguro=="error"){
             return(
             <div>
