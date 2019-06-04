@@ -1,3 +1,28 @@
 .button {
     background-color: #388E3C
 }
+
+.button_reports {
+    background-color: #7295a4
+}
+
+.menu_button {
+    padding: 20px 10px;
+    width: 150px;
+    min-height: 90px;
+    vertical-align: top;
+    line-height: 1.3em;
+    margin: 10px;
+    text-align: center;
+    background: -moz-linear-gradient(top, #ffffff, #dddddd);
+    background-color: #dddddd;
+    border: #dddddd 1px solid;
+    padding: 8px 20px;
+    display: inline-block;
+    line-height: 1.2em;
+    color: #363463;
+    cursor: pointer;
+    min-width: 0;
+    max-width: 300px;
+    text-decoration: none;
+}
