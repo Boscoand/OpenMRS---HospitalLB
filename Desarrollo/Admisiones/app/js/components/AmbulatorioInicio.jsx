@@ -1,10 +1,20 @@
 import React from 'react';
 import apiCall from '../utilities/apiHelper';
-import {SEGURO_UUID} from '../utilities/constants';
+import {
+    SEGURO_UUID,
+    HOME,
+    JASPER_ROTULO_ADMISIONES,
+    JASPER_GARANTIA_ADMISIONES,
+    JASPER_REG_RAPIDO_ADMISIONES,
+    JASPER_HOJA_INGRESO_ADMISIONES
+} from '../utilities/constants';
 import DatosPreliminares from './DatosPreliminares';
+import ReactTable from "react-table";
 import { Col, Label, Button, Form, FormControl, FormGroup, ControlLabel, Panel, Row } from "react-bootstrap"
 import "./AmbulatorioInicio.css"
+import 'react-table/react-table.css';
 import '../styles/button.css'
+import OpenMRSView from './openmrsView'
 
 export default class AmbulatorioInicio extends React.Component {
 
@@ -19,10 +29,12 @@ export default class AmbulatorioInicio extends React.Component {
         this.getAge = this.getAge.bind(this);
         this.getPatient = this.getPatient.bind(this);
         this.state = {
+            server : "localhost:8080",
             patient:"",
             seguro:"",
             provider:"",
-            preliminares:{}
+            preliminares:{},
+            url: ""
         };
         this.aReportes = this.aReportes.bind(this);
         this.aFormulario = this.aFormulario.bind(this);
@@ -32,7 +44,10 @@ export default class AmbulatorioInicio extends React.Component {
         this.reporteRegistroRapido = this.reporteRegistroRapido.bind(this);
         this.handleChange_cedula = this.handleChange_cedula.bind(this);
         this.changeReporteTipo = this.changeReporteTipo.bind(this);
+        this.aInicio = this.aInicio.bind(this);
         this.reporte_tipo = "";
+        this.renderForm = this.renderForm.bind(this);
+        this.routeChange = this.routeChange.bind(this);
     }
 
     handleChange(ev){
@@ -54,6 +69,9 @@ export default class AmbulatorioInicio extends React.Component {
         window.location.replace("#ambulatorio/datos");
     }
 
+    routeChange(path) {
+        window.open(HOME+'/'+path,'targetWindow','toolbar=no,location=no, status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=400,centerscreen=yes');
+    }
 
     getAge(dateString)
 {
@@ -106,20 +124,13 @@ export default class AmbulatorioInicio extends React.Component {
                         this.setState({seguro:seguro, provider: prov.split(":")[0]});
                         this.props.savePatientOpenMRSID(this.state.patient);
                         this.getPatient(this.state.patient);
-
-
-
-
                         }else{
                             this.setState({seguro:"error"});
-                        }
-                                                                                                                                                                      //&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Df59fba90-e7bbF-4783-8d54-7368cf3cb525%26
+                        }                                                                                                          //&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Df59fba90-e7bbF-4783-8d54-7368cf3cb525%26
                   });
             }else{
                 this.setState({seguro:"error"});
             }
-
-
       });
     }
 
@@ -139,6 +150,11 @@ export default class AmbulatorioInicio extends React.Component {
         this.setState({seguro:"reportes"});
     }
 
+    aInicio() {
+        console.log('A INICIO');
+        this.setState({seguro:"", "url": ""});
+    }
+
     aFormulario() {
         console.log('A FORMULARIO');
         // this.setState({seguro:"formulario"});
@@ -155,6 +171,12 @@ export default class AmbulatorioInicio extends React.Component {
     changeReporteTipo(tipo) {
         this.reporte_tipo = tipo;
         this.setState({seguro:"reportes"});
+    }
+
+    renderForm(url_report) {
+        let url = `http://${this.state.server}/` + url_report
+        console.log(url);
+        this.setState({"url": url});
     }
 
     render() {
@@ -192,6 +214,7 @@ export default class AmbulatorioInicio extends React.Component {
               fontSize: '13px'
             }
         };
+
         if(this.state.seguro==""){
             return (
             <div>
@@ -203,247 +226,29 @@ export default class AmbulatorioInicio extends React.Component {
                 </Button>
             </div>
         )}
-        if((this.state.seguro=="reportes") && (this.reporte_tipo == "")){
+        if(this.state.seguro=="reportes"){
             return(
                 <div>
-                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.changeReporteTipo("registro_rapido")}>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.renderForm(JASPER_REG_RAPIDO_ADMISIONES)}>
                     Reporte Registro Rapido
                     </Button>
-                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.changeReporteTipo("reporte_rotulo")}>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.renderForm(JASPER_ROTULO_ADMISIONES)}>
                     Reporte Rotulo
                     </Button>
-                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.changeReporteTipo("reporte_garantia")}>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.renderForm(JASPER_GARANTIA_ADMISIONES)}>
                     Reporte Garantia
                     </Button>
-                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.changeReporteTipo("reporte_hoja")}>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.renderForm(JASPER_HOJA_INGRESO_ADMISIONES)}>
                     Reporte Hoja de Ingreso
                     </Button>
-                </div>
-            )
-        }
-        if(this.reporte_tipo == "registro_rapido") {
-            console.log("rapido!!!");
-            return(
-                <div>
-                    <Form horizontal>
-                        <Row>
-                            <Col md={3}/>
-                            <Col md={6}>
-                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Reportes Registro Rapido</Label></h1>
-
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col md={3}/>
-                            <Col md={6}>
-                            <h6 style={{color:"gray"}}>Reporte registro rapido</h6>
-                                <Panel bsStyle="info">
-                                    <Panel.Body>
-                                            <FormGroup controlId="variableID">
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                            </FormGroup>
-                                            <FormGroup>
-                                                <Col md={12}>
-                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.reporteRegistroRapido}>Crear reporte</Button>
-                                                </Col>
-                                            </FormGroup>
-                                    </Panel.Body>
-                                </Panel>
-                            </Col>
-                        </Row>
-                    </Form>
-                </div>
-            )
-        }
-        if(this.reporte_tipo == "reporte_rotulo") {
-            console.log("rotulo!!!");
-            return(
-                <div>
-                    <Form horizontal>
-                        <Row>
-                            <Col md={3}/>
-                            <Col md={6}>
-                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Reportes Rotulo</Label></h1>
-
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col md={3}/>
-                            <Col md={6}>
-                            <h6 style={{color:"gray"}}>Reporte Rotulo</h6>
-                                <Panel bsStyle="info">
-                                    <Panel.Body>
-                                            <FormGroup controlId="variableID">
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese historia</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese convenio</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese medico</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                            </FormGroup>
-                                            <FormGroup>
-                                                <Col md={12}>
-                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.reporteRegistroRapido}>Crear reporte</Button>
-                                                </Col>
-                                            </FormGroup>
-                                    </Panel.Body>
-                                </Panel>
-                            </Col>
-                        </Row>
-                    </Form>
-                </div>
-            )
-        }
-        if(this.reporte_tipo == "reporte_garantia") {
-            console.log("rotulo!!!");
-            return(
-                <div>
-                    <Form horizontal>
-                        <Row>
-                            <Col md={3}/>
-                            <Col md={6}>
-                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Reportes Garantia</Label></h1>
-
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col md={3}/>
-                            <Col md={6}>
-                            <h6 style={{color:"gray"}}>Reporte Garantia</h6>
-                                <Panel bsStyle="info">
-                                    <Panel.Body>
-                                            <FormGroup controlId="variableID">
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese nombre del Doctor encargado</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese nombre de persona garante</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula del garante</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese telefono del garante</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese trabajo del garante</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                            </FormGroup>
-                                            <FormGroup>
-                                                <Col md={12}>
-                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.reporteRegistroRapido}>Crear reporte</Button>
-                                                </Col>
-                                            </FormGroup>
-                                    </Panel.Body>
-                                </Panel>
-                            </Col>
-                        </Row>
-                    </Form>
-                </div>
-            )
-        }
-        if(this.reporte_tipo == "reporte_hoja") {
-            console.log("rotulo!!!");
-            return(
-                <div>
-                    <Form horizontal>
-                        <Row>
-                            <Col md={3}/>
-                            <Col md={6}>
-                                <h1 style={ styles.marginTitulo }><Label style={ styles.labelComplete }>Reportes Hoja de Ingreso</Label></h1>
-
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col md={3}/>
-                            <Col md={6}>
-                            <h6 style={{color:"gray"}}>Reporte Hoja de Ingreso</h6>
-                                <Panel bsStyle="info">
-                                    <Panel.Body>
-                                            <FormGroup controlId="variableID">
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese cedula</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese Nombre de Medico</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese Diagnostico</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <ControlLabel style={ styles.sizeFields }>Ingrese Diagnostico asociado</ControlLabel>
-                                                    {""}
-                                                    <FormControl data-id="" type="text" value={this.reporte_params.cedula} onChange={this.handleChange_cedula}/>
-                                                    <FormControl.Feedback/>
-                                                </Col>
-                                            </FormGroup>
-                                            <FormGroup>
-                                                <Col md={12}>
-                                                    <Button bsStyle="success" className="button" style={ styles.button } onClick={this.reporteRegistroRapido}>Crear reporte</Button>
-                                                </Col>
-                                            </FormGroup>
-                                    </Panel.Body>
-                                </Panel>
-                            </Col>
-                        </Row>
-                    </Form>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={this.aInicio}>
+                    Atras
+                    </Button>
+                    <Panel bsStyle="info" theme="chemical">
+                        <Panel.Body>
+                            <OpenMRSView url={this.state.url}/>
+                        </Panel.Body>
+                    </Panel>
                 </div>
             )
         }
@@ -458,7 +263,6 @@ export default class AmbulatorioInicio extends React.Component {
                                 <h6 style={{color:"gray"}}>Buscar el paciente por su código de Atención</h6>
                             </Col>
                         </Row>
-
                         <Row>
                             <Col md={3}/>
                             <Col md={6}>
