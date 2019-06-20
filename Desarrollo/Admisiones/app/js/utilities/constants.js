@@ -6,8 +6,8 @@ export const UNCLE_UUID = "8d91a3dc-c2cc-11de-8d13-0010c6dffd0f"
 
 export const ENCOUNTER_TYPE_UUID = "67a71486-1a54-468f-ac3e-7091a9a79584"
 export const DEFAULT_PROVIDER = "nurse"
-// export const HOME = "http://200.10.147.155:8080"
-export const HOME = "http://localhost:8080"
+export const HOME = "http://200.10.147.155:8080"
+// export const HOME = "http://localhost:8080"
 
 export const OCUPACION_UUID = "45b10eed-6af7-4683-a734-aa0cb4097cbd";
 export const NACIMIENTO_UUID = "8d8718c2-c2cc-11de-8d13-0010c6dffd0f";
@@ -24,7 +24,7 @@ export const CONYUGE_NOMBRE_UUID = "ff3f432f-934e-4a4d-a8ac-1979da6fc37e";
 
 export const SEGUNDO_PROGENITOR_UUID = "080b94ab-d726-456f-afa5-0cf834a7a231";
 
-export const JASPER_ROTULO_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=21";
-export const JASPER_GARANTIA_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=18";
-export const JASPER_HOJA_INGRESO_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=20";
-export const JASPER_REG_RAPIDO_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=16";
+export const JASPER_ROTULO_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=19";
+export const JASPER_GARANTIA_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=20";
+export const JASPER_HOJA_INGRESO_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=22";
+export const JASPER_REG_RAPIDO_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=15";

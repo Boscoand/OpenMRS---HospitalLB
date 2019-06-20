@@ -52,7 +52,7 @@ var getConfig = function () {
 	    // create file with defaults if not found
 	    config = {
 	      'LOCAL_OWA_FOLDER': '/usr/local/tomcat/.OpenMRS/owa/',
-	      'APP_ENTRY_POINT': 'http://localhost:9001/openmrs/owa/admisiones/index.html'
+	      'APP_ENTRY_POINT': 'http://localhost:8080/openmrs/owa/admisiones/index.html'
 	    };
 
 	    fs.writeFile('config.json', JSON.stringify(config));

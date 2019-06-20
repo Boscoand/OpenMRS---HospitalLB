@@ -6,7 +6,7 @@ import {
     JASPER_ROTULO_ADMISIONES,
     JASPER_GARANTIA_ADMISIONES,
     JASPER_REG_RAPIDO_ADMISIONES,
-    JASPER_HOJA_INGRESO_ADMISIONES
+    JASPER_HOJA_INGRESO_ADMISIONES,
 } from '../utilities/constants';
 import DatosPreliminares from './DatosPreliminares';
 import ReactTable from "react-table";
@@ -29,7 +29,7 @@ export default class AmbulatorioInicio extends React.Component {
         this.getAge = this.getAge.bind(this);
         this.getPatient = this.getPatient.bind(this);
         this.state = {
-            server : "localhost:8080",
+            server : HOME,
             patient:"",
             seguro:"",
             provider:"",
@@ -174,7 +174,7 @@ export default class AmbulatorioInicio extends React.Component {
     }
 
     renderForm(url_report) {
-        let url = `http://${this.state.server}/` + url_report
+        let url = `${this.state.server}/` + url_report
         console.log(url);
         this.setState({"url": url});
     }
