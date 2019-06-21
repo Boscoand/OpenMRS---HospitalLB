@@ -28,3 +28,4 @@ export const JASPER_ROTULO_ADMISIONES = "openmrs/module/jasperreport/jreportGene
 export const JASPER_GARANTIA_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=20";
 export const JASPER_HOJA_INGRESO_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=22";
 export const JASPER_REG_RAPIDO_ADMISIONES = "openmrs/module/jasperreport/jreportGenerate.form?reportId=15";
+export const JASPER_FORMULARIO_008 = "openmrs/module/jasperreport/jreportGenerate.form?reportId=24";

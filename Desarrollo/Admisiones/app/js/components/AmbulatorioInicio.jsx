@@ -7,6 +7,7 @@ import {
     JASPER_GARANTIA_ADMISIONES,
     JASPER_REG_RAPIDO_ADMISIONES,
     JASPER_HOJA_INGRESO_ADMISIONES,
+    JASPER_FORMULARIO_008,
 } from '../utilities/constants';
 import DatosPreliminares from './DatosPreliminares';
 import ReactTable from "react-table";
@@ -240,6 +241,9 @@ export default class AmbulatorioInicio extends React.Component {
                     </Button>
                     <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.renderForm(JASPER_HOJA_INGRESO_ADMISIONES)}>
                     Reporte Hoja de Ingreso
+                    </Button>
+                    <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={() => this.renderForm(JASPER_FORMULARIO_008)}>
+                    FORMULARIO 008
                     </Button>
                     <Button id="button_reportes" className="menu_button" style={ styles.button } onClick={this.aInicio}>
                     Atras
