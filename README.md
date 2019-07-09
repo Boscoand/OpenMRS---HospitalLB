@@ -17,7 +17,7 @@ Aquella ruta debe coincidir con la que se encuentra en la configuracion de OpenM
 Ejecutar las siguientes sentencias:
 ``` bash
 $ npm i
-$ sudo npm run:build
+$ sudo npm build:deploy
 ```
 Esto instalara el modulo en la carpeta ``/var/lib/OpenMRS/owa/`` o donde se haya especificado en ``config.json`` 
 Procedemos a reiniciar Tomcat
